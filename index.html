@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Đã thêm thẻ xác minh Monetag tại đây -->
+    <meta name="monetag" content="6f470e6dc0c56b2f171a866efe03bcc0">
+    
     <title id="pageTitle">Hanimerachel</title>
     <!-- Favicon displays icon on browser tab -->
     <link rel="icon" id="siteFavicon" href="https://via.placeholder.com/36">
@@ -10,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* ... Các style của bạn giữ nguyên không đổi ... */
         * {
             margin: 0;
             padding: 0;
@@ -296,9 +300,24 @@
             text-overflow: ellipsis;
         }
 
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
+        }
+
         .chapter-link {
             font-size: 13px;
             color: #38bdf8;
+        }
+
+        .views-count {
+            font-size: 12px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .delete-btn {
@@ -462,7 +481,6 @@
                 <input type="text" id="searchInput" placeholder="Search manga by title..." oninput="filterManga()">
             </div>
 
-            <!-- Support me button linked directly to Patreon -->
             <a href="https://www.patreon.com/cw/rachelanimation" target="_blank" rel="noopener noreferrer" class="support-btn">Support me</a>
         </div>
     </header>
@@ -523,7 +541,7 @@
 
         <div class="reader-view" id="readerView">
             <div class="reader-header">
-                <button class="back-btn" onclick="showMainList()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                <button class="back-btn" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Back</button>
                 <h3 id="readerTitle" style="color: #38bdf8;">Manga Title</h3>
             </div>
             <div class="reader-images" id="readerImages"></div>
@@ -551,12 +569,10 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, setDoc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // 1. API Key ImgBB của bạn
         const IMGBB_API_KEY = "88a380e9dcc9dde48c74d059183af11b";
 
-        // 2. Cấu hình Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCoT5juzr15S9u8rkqZbkPr0eiy6FWv1nI",
             authDomain: "hanimerachel-d80b2.firebaseapp.com",
@@ -584,7 +600,6 @@
         const submitBtn = document.getElementById('submitBtn');
         const updateLogoBtn = document.getElementById('updateLogoBtn');
 
-        // Hàm tải ảnh lên ImgBB
         async function uploadToImgBB(file) {
             const formData = new FormData();
             formData.append("image", file);
@@ -600,7 +615,6 @@
             }
         }
 
-        // Tải Logo từ Firebase Cloud
         async function loadSavedLogo() {
             try {
                 const docRef = doc(db, "settings", "siteConfig");
@@ -719,6 +733,7 @@
                     title: title,
                     chapter: chapter,
                     images: imageUrls,
+                    views: 0, 
                     createdAt: new Date()
                 });
 
@@ -748,6 +763,7 @@
                 querySnapshot.forEach((docSnap) => {
                     const manga = docSnap.data();
                     const mangaId = docSnap.id;
+                    const views = manga.views || 0; 
 
                     const mangaCard = document.createElement('div');
                     mangaCard.className = 'manga-card';
@@ -759,13 +775,16 @@
                         </div>
                         <div class="card-details">
                             <h3 class="manga-title">${manga.title}</h3>
-                            <span class="chapter-link">${manga.chapter}</span>
+                            <div class="card-footer">
+                                <span class="chapter-link">${manga.chapter}</span>
+                                <span class="views-count"><i class="fa-regular fa-eye"></i> ${views}</span>
+                            </div>
                         </div>
                     `;
 
                     mangaCard.addEventListener('click', function(e) {
                         if (!e.target.classList.contains('delete-btn')) {
-                            openComicReader(manga.title, manga.chapter, manga.images);
+                            openComicReader(mangaId, manga.title, manga.chapter, manga.images);
                         }
                     });
 
@@ -830,7 +849,16 @@
             }
         };
 
-        window.openComicReader = function(title, chapter, imageUrls) {
+        window.openComicReader = async function(id, title, chapter, imageUrls) {
+            try {
+                const mangaRef = doc(db, "mangas", id);
+                await updateDoc(mangaRef, {
+                    views: increment(1)
+                });
+            } catch (err) {
+                console.error("Lỗi tăng lượt xem:", err);
+            }
+
             mangaListView.style.display = 'none';
             readerView.classList.add('active');
             readerTitle.textContent = `${title} - ${chapter}`;
@@ -843,14 +871,26 @@
             });
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            history.pushState({ view: 'reader' }, '');
         };
 
         window.showMainList = function() {
             readerView.classList.remove('active');
             mangaListView.style.display = 'block';
+            renderMangaList(); 
         };
 
-        // Khởi chạy khi load trang
+        window.goBack = function() {
+            history.back();
+        };
+
+        window.addEventListener('popstate', function(e) {
+            if (readerView.classList.contains('active')) {
+                showMainList();
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             loadSavedLogo();
             renderMangaList();
