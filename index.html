@@ -580,13 +580,13 @@
             
             <div class="reader-single-page">
                 <img id="currentImagePage" src="" alt="Page">
-                <div id="pageLoadingSpinner" style="color: #94a3b8; font-size: 14px;">Đang tải trang...</div>
+                <div id="pageLoadingSpinner" style="color: #94a3b8; font-size: 14px;">Loading page...</div>
             </div>
 
             <div class="reader-nav-bar">
-                <button id="prevPageBtn" class="page-nav-btn" onclick="changePage(-1)"><i class="fa-solid fa-chevron-left"></i> Trang trước</button>
-                <span id="pageIndicator" style="color: #cbd5e1; font-weight: 600; font-size: 14px;">1 / 1</span>
-                <button id="nextPageBtn" class="page-nav-btn" onclick="changePage(1)">Trang sau <i class="fa-solid fa-chevron-right"></i></button>
+                <button id="prevPageBtn" class="page-nav-btn" onclick="changePage(-1)"><i class="fa-solid fa-chevron-left"></i> Prev</button>
+                <span id="pageIndicator" style="color: #cbd5e1; font-weight: 600; font-size: 14px;">Page 1 / 44</span>
+                <button id="nextPageBtn" class="page-nav-btn" onclick="changePage(1)">Next <i class="fa-solid fa-chevron-right"></i></button>
             </div>
         </div>
     </main>
@@ -615,6 +615,7 @@
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, setDoc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const IMGBB_API_KEY = "88a380e9dcc9dde48c74d059183af11b";
+        const AD_DIRECT_LINK = "https://omg10.com/4/11614407";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCoT5juzr15S9u8rkqZbkPr0eiy6FWv1nI",
@@ -830,9 +831,23 @@
                     `;
 
                     mangaCard.addEventListener('click', function(e) {
-                        if (!e.target.classList.contains('delete-btn')) {
-                            openComicReader(mangaId, manga.title, manga.chapter, manga.images);
+                        if (e.target.classList.contains('delete-btn')) return;
+
+                        // Kiểm tra thời gian hiển thị quảng cáo (định mức: 1 phút = 60000ms)
+                        const lastAdTime = localStorage.getItem('last_ad_time');
+                        const currentTime = new Date().getTime();
+                        const oneMinute = 60000;
+
+                        if (!lastAdTime || (currentTime - parseInt(lastAdTime)) > oneMinute) {
+                            // Cập nhật lại thời gian hiện tại vào localStorage
+                            localStorage.setItem('last_ad_time', currentTime.toString());
+                            
+                            // Mở quảng cáo ra tab mới
+                            window.open(AD_DIRECT_LINK, '_blank');
                         }
+
+                        // Mở bộ đọc truyện bình thường
+                        openComicReader(mangaId, manga.title, manga.chapter, manga.images);
                     });
 
                     mangaGrid.appendChild(mangaCard);
@@ -859,10 +874,6 @@
         window.filterManga = function() {
             const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
             
-            if (keyword.length > 0 && readerView.classList.contains('active')) {
-                showMainList();
-            }
-
             const cards = document.querySelectorAll('.manga-card');
             let matchedCount = 0;
 
@@ -927,11 +938,11 @@
             const prevBtn = document.getElementById('prevPageBtn');
             const nextBtn = document.getElementById('nextPageBtn');
 
-            indicator.textContent = `Trang ${currentIndex + 1} / ${currentReaderImages.length}`;
+            indicator.textContent = `Page ${currentIndex + 1} / ${currentReaderImages.length}`;
 
             imgElement.style.display = 'none';
             spinner.style.display = 'block';
-            spinner.innerHTML = 'Đang tải trang...';
+            spinner.innerHTML = 'Loading page...';
 
             const img = new Image();
             img.src = currentReaderImages[currentIndex];
@@ -941,7 +952,7 @@
                 imgElement.style.display = 'block';
             };
             img.onerror = function() {
-                spinner.innerHTML = `Không thể tải trang này! <button onclick="renderCurrentPage()" style="margin-left: 10px; background: #38bdf8; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #0f172a;">Thử lại</button>`;
+                spinner.innerHTML = `Failed to load this page! <button onclick="renderCurrentPage()" style="margin-left: 10px; background: #38bdf8; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #0f172a;">Retry</button>`;
             };
 
             prevBtn.disabled = currentIndex === 0;
