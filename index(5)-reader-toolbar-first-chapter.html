@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Hanimerachel - Read Latest Manga Online</title>
+    <meta name="description"
+        content="Explore and read the latest manga updates online on Hanimerachel with high quality images and smooth reader experience.">
+    <link rel="canonical" href="https://hanimerachel.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hanimerachel.com/">
+    <meta property="og:title" content="Hanimerachel - Read Latest Manga Online">
+    <meta property="og:description" content="Explore and read the latest manga updates online on Hanimerachel.">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hanimerachel - Read Latest Manga Online">
+    <meta name="twitter:description" content="Explore and read the latest manga updates online on Hanimerachel.">
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Hanimerachel",
+      "url": "https://hanimerachel.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://hanimerachel.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <link rel="icon" id="siteFavicon" href="https://via.placeholder.com/36">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Đã cập nhật tag script mới theo yêu cầu của bạn -->
+    <script src="https://5gvci.com/act/files/tag.min.js?z=11884470" data-cfasync="false" async></script>
+    
+    <script>
+        (function () {
+            const MAX_CLICKS = 5;
+            const COOLDOWN_TIME = 15000; // 15 giây
+            const ZONE_ID = '11877908';
+            const SCRIPT_URL = 'https://al5sm.com/tag.min.js';
+
+            const COUNT_KEY = 'pop_click_count';
+            const LAST_KEY = 'pop_last_time';
+
+            function getCount() {
+                const count = parseInt(localStorage.getItem(COUNT_KEY) || '0', 10);
+                return Number.isFinite(count) && count >= 0 ? count : 0;
+            }
+
+            function getLastTime() {
+                const time = parseInt(localStorage.getItem(LAST_KEY) || '0', 10);
+                return Number.isFinite(time) && time >= 0 ? time : 0;
+            }
+
+            function canTrigger() {
+                const count = getCount();
+                if (count >= MAX_CLICKS) return false;
+
+                const lastTime = getLastTime();
+                return lastTime === 0 || (Date.now() - lastTime >= COOLDOWN_TIME);
+            }
+
+            function markTrigger() {
+                localStorage.setItem(COUNT_KEY, String(getCount() + 1));
+                localStorage.setItem(LAST_KEY, String(Date.now()));
+            }
+
+            function clickGate(event) {
+                if (event.__popunderGateChecked) return;
+                event.__popunderGateChecked = true;
+
+                if (canTrigger()) {
+                    markTrigger();
+                    return;
+                }
+
+                event.stopImmediatePropagation();
+            }
+
+            function loadPopunderScript() {
+                if (document.getElementById('hanimerachel-popunder-script')) return;
+
+                const script = document.createElement('script');
+                script.id = 'hanimerachel-popunder-script';
+                script.dataset.zone = ZONE_ID;
+                script.src = SCRIPT_URL;
+                script.async = true;
+
+                (document.body || document.documentElement).appendChild(script);
+            }
+
+            window.addEventListener('DOMContentLoaded', function () {
+                if (document.body) {
+                    document.body.addEventListener('click', clickGate, false);
+                }
+                document.addEventListener('click', clickGate, false);
+
+                loadPopunderScript();
+            });
+        })();
+    </script>
+
+    <style>
+    /* ===== GLOBAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0b111e;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background-color: #0f172a;
+            padding: 12px 24px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #38bdf8;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .blue-text {
+            color: #38bdf8;
+        }
+
+        .orange-text {
+            color: #ff6b35;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 450px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 9px 16px 9px 40px;
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 20px;
+            color: #cbd5e1;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: #38bdf8;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .support-btn {
+            background-color: #ff6b4a;
+            color: #ffffff;
+            padding: 10px 22px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+
+        .support-btn:hover {
+            opacity: 0.9;
+        }
+
+        .telegram-btn {
+            background-color: #229ed9;
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.2s;
+        }
+
+        .telegram-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* ===== ADMIN ===== */
+        .admin-panel {
+            display: none;
+            background-color: #0f172a;
+            border-bottom: 2px solid #38bdf8;
+            padding: 20px 24px;
+        }
+
+        .admin-panel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .admin-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .admin-panel-header h3 {
+            color: #38bdf8;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-section-title {
+            color: #94a3b8;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .logout-btn {
+            background-color: #ef4444;
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .admin-form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            align-items: end;
+        }
+
+        .admin-divider {
+            border: none;
+            border-top: 1px dashed #334155;
+            margin: 20px 0;
+        }
+
+        .admin-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .admin-form-group label {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .admin-form-group input {
+            padding: 9px 12px;
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .file-input {
+            padding: 6px !important;
+            cursor: pointer;
+        }
+
+        .publish-btn {
+            background-color: #10b981;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .update-logo-btn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* ===== CONTENT ===== */
+        .main-content {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 24px;
+        }
+
+        .section-title h1 {
+            color: #38bdf8;
+            font-size: 16px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .divider {
+            border: none;
+            height: 1px;
+            background-color: #1e293b;
+            margin: 14px 0 24px 0;
+        }
+
+        .manga-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .manga-card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 180px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card-thumb {
+            position: relative;
+            width: 100%;
+            height: 220px;
+        }
+
+        .card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge {
+            position: absolute;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .pages-badge {
+            top: 8px;
+            right: 8px;
+            background-color: #38bdf8;
+            color: #0f172a;
+        }
+
+        .card-details {
+            padding: 12px;
+        }
+
+        .manga-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
+        }
+
+        .chapter-link {
+            font-size: 13px;
+            color: #38bdf8;
+        }
+
+        .chapter-badge {
+            display: inline-flex;
+            align-items: center;
+            max-width: 100%;
+            padding: 4px 11px;
+            border-radius: 999px;
+            background: #223f91;
+            color: #dbeafe;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .views-count {
+            font-size: 12px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .delete-btn {
+            display: none;
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .edit-btn {
+            display: none;
+            position: absolute;
+            top: 8px;
+            left: 40px;
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 10;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+
+        body.is-admin .delete-btn,
+        body.is-admin .edit-btn {
+            display: flex;
+        }
+
+        /* ===== READER ===== */
+        .reader-view {
+            display: none;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reader-view.active {
+            display: block;
+        }
+
+        .reader-toolbar-wrap {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            margin-bottom: 15px;
+        }
+
+        .reader-toolbar {
+            display: grid;
+            grid-template-columns: 44px 44px 44px minmax(0, 1fr) 44px;
+            align-items: center;
+            gap: 6px;
+            width: 100%;
+            background: #0f172a;
+            padding: 7px;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+        }
+
+        .reader-tool-btn {
+            width: 44px;
+            height: 44px;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            background: #172033;
+            color: #e2e8f0;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .15s, border-color .15s, transform .1s;
+        }
+
+        .reader-tool-btn:hover:not(:disabled) {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .reader-tool-btn:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
+        .reader-tool-btn:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+        }
+
+        .reader-chapter-select {
+            width: 100%;
+            height: 44px;
+            min-width: 0;
+            padding: 0 34px 0 14px;
+            border: 1px solid #2563eb;
+            border-radius: 10px;
+            background: #0f172a;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .reader-chapter-select:focus {
+            border-color: #38bdf8;
+        }
+
+        .reader-chapter-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            width: 280px;
+            max-width: min(280px, 90vw);
+            max-height: 55vh;
+            overflow-y: auto;
+            padding: 8px;
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .35);
+        }
+
+        .reader-chapter-menu.active {
+            display: block;
+        }
+
+        .reader-chapter-menu button {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: #cbd5e1;
+            text-align: left;
+            padding: 9px 10px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .reader-chapter-menu button:hover,
+        .reader-chapter-menu button.active {
+            background: #1e293b;
+            color: #38bdf8;
+        }
+
+        .reader-toolbar-title {
+            margin-top: 7px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media (max-width: 600px) {
+            .reader-toolbar-wrap { top: 6px; }
+            .reader-toolbar {
+                grid-template-columns: 40px 40px 40px minmax(0, 1fr) 40px;
+                gap: 5px;
+                padding: 6px;
+            }
+            .reader-tool-btn, .reader-chapter-select { height: 40px; }
+            .reader-tool-btn { width: 40px; font-size: 16px; }
+            .reader-chapter-select { font-size: 13px; padding-left: 10px; }
+        }
+
+        .reader-scroll-container {
+            width: 100%;
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .reader-page {
+            width: 100%;
+            display: block;
+            margin: 0 auto 10px auto;
+            text-align: center;
+            background: #0b111e;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .reader-page img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+
+        .reader-page-loading {
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .reader-footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            background-color: #0f172a;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        /* ===== SERIES / CHAPTERS ===== */
+        .series-card {
+            width: 180px;
+        }
+
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .chapter-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            padding: 7px 8px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 5px;
+            color: #38bdf8;
+            cursor: pointer;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .chapter-item:hover {
+            border-color: #38bdf8;
+        }
+
+        .chapter-read-btn {
+            flex: 1;
+            min-width: 0;
+            padding: 0;
+            border: none;
+            background: none;
+            color: #38bdf8;
+            cursor: pointer;
+            font-size: 12px;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .chapter-read-btn span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .chapter-item span:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .chapter-admin-actions {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateX(4px);
+            transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
+        }
+
+        body.is-admin .chapter-item:hover .chapter-admin-actions,
+        body.is-admin .chapter-item:focus-within .chapter-admin-actions {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        body:not(.is-admin) .chapter-admin-actions {
+            display: none;
+        }
+
+        .chapter-admin-btn {
+            width: 22px;
+            height: 22px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .chapter-edit-btn {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+
+        .chapter-delete-btn {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .admin-form-group select {
+            padding: 9px 12px;
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .admin-form-group select:focus {
+            border-color: #38bdf8;
+        }
+
+        /* ===== MODALS ===== */
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-modal.active {
+            display: flex;
+        }
+
+        .admin-box {
+            background-color: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 30px;
+            width: 100%;
+            max-width: 380px;
+            position: relative;
+        }
+
+        .admin-box h3 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px 14px;
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .admin-login-btn {
+            width: 100%;
+            background-color: #ff6b4a;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 13px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo" onclick="showMainList(event);">
+                <img src="https://via.placeholder.com/36" width="36" height="36" alt="Avatar" class="logo-img"
+                    id="siteLogoImg" loading="lazy">
+                <span class="logo-text" id="siteLogoText"><span class="blue-text">Hanime</span><span
+                        class="orange-text">rachel</span></span>
+            </a>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search manga by title..." oninput="filterManga()">
+            </div>
+
+            <div class="nav-actions">
+                <a href="https://t.me/+S6EiqeOBhpVmNjg1" target="_blank" rel="noopener noreferrer"
+                    class="telegram-btn"><i class="fa-brands fa-telegram"></i> Telegram</a>
+                <a href="https://www.patreon.com/cw/rachelanimation" target="_blank" rel="noopener noreferrer"
+                    class="support-btn">Support me</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-panel-container">
+            <div class="admin-panel-header">
+                <h3><i class="fa-solid fa-sliders"></i> ADMIN CONTROL PANEL</h3>
+                <button class="logout-btn" onclick="logoutAdmin()">Admin Logout</button>
+            </div>
+
+            <div class="admin-section-title"><i class="fa-solid fa-cloud-arrow-up"></i> ADD NEW CHAPTER</div>
+            <form id="uploadMangaForm" class="admin-form-grid">
+                <div class="admin-form-group">
+                    <label for="mangaTitle">Manga / Series Title</label>
+                    <input type="text" id="mangaTitle" placeholder="e.g., Home School" required>
+                </div>
+                <div class="admin-form-group">
+                    <label for="chapterName">Chapter Name</label>
+                    <input type="text" id="chapterName" placeholder="e.g., Chapter 1" required>
+                </div>
+                <div class="admin-form-group">
+                    <label for="mangaFiles">Select chapter images</label>
+                    <input type="file" id="mangaFiles" class="file-input" accept="image/*" multiple required>
+                </div>
+                <button type="submit" class="publish-btn" id="submitBtn"><i class="fa-solid fa-upload"></i> Publish Chapter</button>
+            </form>
+
+            <hr class="admin-divider">
+
+            <div class="admin-section-title"><i class="fa-solid fa-layer-group"></i> MERGE MANGA BY SAME NAME</div>
+            <form id="mergeMangaForm" class="admin-form-grid">
+                <div class="admin-form-group">
+                    <label for="mergeTitle">Manga / Series Title</label>
+                    <input type="text" id="mergeTitle" placeholder="e.g., Home School" required>
+                </div>
+                <button type="submit" class="update-logo-btn" id="mergeMangaBtn"><i class="fa-solid fa-link"></i> Merge Same-Name Chapters</button>
+            </form>
+
+            <hr class="admin-divider">
+
+            <div class="admin-section-title"><i class="fa-solid fa-pen-to-square"></i> CHANGE LOGO & WEBSITE NAME</div>
+            <form id="updateLogoForm" class="admin-form-grid">
+                <div class="admin-form-group">
+                    <label for="newLogoText1">First Word (Blue)</label>
+                    <input type="text" id="newLogoText1" placeholder="e.g., Hanime">
+                </div>
+                <div class="admin-form-group">
+                    <label for="newLogoText2">Second Word (Orange)</label>
+                    <input type="text" id="newLogoText2" placeholder="e.g., rachel">
+                </div>
+                <div class="admin-form-group">
+                    <label for="newLogoFile">Select new Logo image (Also Tab icon)</label>
+                    <input type="file" id="newLogoFile" class="file-input" accept="image/*">
+                </div>
+                <button type="submit" class="update-logo-btn" id="updateLogoBtn"><i class="fa-solid fa-floppy-disk"></i>
+                    Update Logo</button>
+            </form>
+
+            <hr class="admin-divider">
+
+            <div class="admin-section-title"><i class="fa-solid fa-rotate-right"></i> RESET DATA</div>
+            <div>
+                <button type="button" class="logout-btn"
+                    style="background-color: #f59e0b; width: 100%; padding: 10px; font-weight: 700; cursor: pointer;"
+                    onclick="resetAllViews()"><i class="fa-solid fa-rotate-right"></i> Reset All Manga Views to
+                    0</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div id="mangaListView">
+            <div class="section-title">
+                <h1><i class="fa-solid fa-fire icon-fire"></i> LATEST ONLINE UPDATES</h1>
+            </div>
+            <hr class="divider">
+            <div class="manga-grid" id="mangaGrid"></div>
+        </div>
+
+        <div class="reader-view" id="readerView">
+            <div class="reader-toolbar-wrap">
+                <div class="reader-toolbar">
+                    <button type="button" class="reader-tool-btn" title="Home" onclick="showMainList(event)">
+                        <i class="fa-solid fa-house"></i>
+                    </button>
+                    <button type="button" class="reader-tool-btn" id="chapterMenuBtn" title="Choose chapter">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <button type="button" class="reader-tool-btn" id="prevChapterBtn" title="Previous chapter">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <select id="readerChapterSelect" class="reader-chapter-select" aria-label="Select chapter"></select>
+                    <button type="button" class="reader-tool-btn" id="nextChapterBtn" title="Next chapter">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="reader-chapter-menu" id="readerChapterMenu"></div>
+                <div class="reader-toolbar-title" id="readerTitle">Manga Title - Chapter</div>
+            </div>
+
+            <div class="reader-scroll-container" id="readerPages">
+                <div style="color: #94a3b8; font-size: 14px; text-align: center; padding: 30px;">Loading pages...</div>
+            </div>
+
+            <div class="reader-footer" id="readerFooter">
+                <i class="fa-solid fa-arrows-up-down"></i> Scroll down to read all pages
+            </div>
+        </div>
+    </main>
+
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-box">
+            <button class="close-modal-btn" onclick="closeAdminModal()">&times;</button>
+            <h3><i class="fa-solid fa-user-shield"></i> Admin Login</h3>
+            <form id="adminLoginForm">
+                <div class="input-group">
+                    <label for="adminUsername">Username</label>
+                    <input type="text" id="adminUsername" required placeholder="Enter admin username...">
+                </div>
+                <div class="input-group">
+                    <label for="adminPassword">Password</label>
+                    <input type="password" id="adminPassword" required placeholder="Enter password...">
+                </div>
+                <button type="submit" class="admin-login-btn">Login</button>
+                <div class="error-message" id="loginError">Incorrect username or password!</div>
+            </form>
+        </div>
+    </div>
+
+    <div class="admin-modal" id="editModal">
+        <div class="admin-box" style="max-width: 450px;">
+            <button class="close-modal-btn" onclick="closeEditModal()">&times;</button>
+            <h3><i class="fa-solid fa-pen-to-square"></i> Edit Manga</h3>
+            <form id="editMangaForm">
+                <input type="hidden" id="editMangaId">
+                <div class="input-group">
+                    <label for="editMangaTitle">Manga Title</label>
+                    <input type="text" id="editMangaTitle" required>
+                </div>
+                <div class="input-group">
+                    <label for="editChapterName">Chapter Name</label>
+                    <input type="text" id="editChapterName" required>
+                </div>
+                <div class="input-group">
+                    <label for="editMangaFiles">Add/Replace Images (Leave blank to keep old images)</label>
+                    <input type="file" id="editMangaFiles" class="file-input" accept="image/*" multiple>
+                </div>
+                <button type="submit" class="admin-login-btn" id="saveEditBtn" style="background-color: #10b981;">Save
+                    Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        // ===== FIREBASE & APP =====
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, setDoc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const IMGBB_API_KEY = "88a380e9dcc9dde48c74d059183af11b";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCoT5juzr15S9u8rkqZbkPr0eiy6FWv1nI",
+            authDomain: "hanimerachel-d80b2.firebaseapp.com",
+            projectId: "hanimerachel-d80b2",
+            storageBucket: "hanimerachel-d80b2.firebasestorage.app",
+            messagingSenderId: "482175668836",
+            appId: "1:482175668836:web:7b5964bbd3cdf1b5e0c571",
+            measurementId: "G-PF1V3ZYHLW"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const adminModal = document.getElementById('adminModal');
+        const adminLoginForm = document.getElementById('adminLoginForm');
+        const loginError = document.getElementById('loginError');
+        const adminPanel = document.getElementById('adminPanel');
+        const uploadMangaForm = document.getElementById('uploadMangaForm');
+        const updateLogoForm = document.getElementById('updateLogoForm');
+        const mangaGrid = document.getElementById('mangaGrid');
+        const mangaListView = document.getElementById('mangaListView');
+        const readerView = document.getElementById('readerView');
+        const readerTitle = document.getElementById('readerTitle');
+        const submitBtn = document.getElementById('submitBtn');
+        const updateLogoBtn = document.getElementById('updateLogoBtn');
+
+        const editModal = document.getElementById('editModal');
+        const editMangaForm = document.getElementById('editMangaForm');
+        const saveEditBtn = document.getElementById('saveEditBtn');
+        const mergeMangaForm = document.getElementById('mergeMangaForm');
+        const mergeTitle = document.getElementById('mergeTitle');
+        const mergeMangaBtn = document.getElementById('mergeMangaBtn');
+        const chapterMenuBtn = document.getElementById('chapterMenuBtn');
+        const readerChapterSelect = document.getElementById('readerChapterSelect');
+        const prevChapterBtn = document.getElementById('prevChapterBtn');
+        const nextChapterBtn = document.getElementById('nextChapterBtn');
+        const readerChapterMenu = document.getElementById('readerChapterMenu');
+
+        let currentReaderImages = [];
+        let currentMangaTitle = "";
+        let currentMangaChapter = "";
+        let currentMangaId = "";
+        let allMangaItems = [];
+        let currentSeriesChapters = [];
+        let currentChapterIndex = 0;
+
+        const READING_LINK_URL = "https://omg10.com/4/11878101";
+        const READING_LINK_COOLDOWN = 30000;
+        const READING_LINK_TIME_KEY = "hanimerachel_reading_link_time";
+
+        function openReadingLink() {
+            const lastTime = parseInt(localStorage.getItem(READING_LINK_TIME_KEY) || "0", 10);
+            const now = Date.now();
+
+            if (lastTime && now - lastTime < READING_LINK_COOLDOWN) return;
+
+            localStorage.setItem(READING_LINK_TIME_KEY, String(now));
+            window.open(READING_LINK_URL, "_blank", "noopener,noreferrer");
+        }
+
+        async function uploadToImgBB(file) {
+            const formData = new FormData();
+            formData.append("image", file);
+            const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                method: "POST",
+                body: formData
+            });
+            const data = await response.json();
+            if (data.success) {
+                return data.data.url;
+            } else {
+                throw new Error("Lỗi tải ảnh lên ImgBB");
+            }
+        }
+
+        async function loadSavedLogo() {
+            try {
+                const docRef = doc(db, "settings", "siteConfig");
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    if (data.logoImg) {
+                        document.getElementById('siteLogoImg').src = data.logoImg;
+                        document.getElementById('siteFavicon').href = data.logoImg;
+                    }
+                    const t1 = data.logoText1 !== undefined ? data.logoText1 : 'Hanime';
+                    const t2 = data.logoText2 !== undefined ? data.logoText2 : 'rachel';
+                    document.getElementById('siteLogoText').innerHTML = `<span class="blue-text">${t1}</span><span class="orange-text">${t2}</span>`;
+                    document.title = `${t1}${t2} - Read Latest Manga Online`;
+                }
+            } catch (e) {
+                console.error("Lỗi tải Logo:", e);
+            }
+        }
+
+        updateLogoForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const text1 = document.getElementById('newLogoText1').value.trim();
+            const text2 = document.getElementById('newLogoText2').value.trim();
+            const logoFile = document.getElementById('newLogoFile').files[0];
+
+            updateLogoBtn.disabled = true;
+            updateLogoBtn.textContent = 'Saving...';
+
+            try {
+                let logoUrl = null;
+                if (logoFile) {
+                    logoUrl = await uploadToImgBB(logoFile);
+                }
+
+                const updateData = {};
+                if (text1 !== "") updateData.logoText1 = text1;
+                if (text2 !== "") updateData.logoText2 = text2;
+                if (logoUrl) updateData.logoImg = logoUrl;
+
+                await setDoc(doc(db, "settings", "siteConfig"), updateData, {merge: true});
+
+                loadSavedLogo();
+                updateLogoForm.reset();
+                alert('Logo, Title, and Tab Favicon have been updated!');
+            } catch (err) {
+                alert('Có lỗi xảy ra khi cập nhật Logo!');
+            } finally {
+                updateLogoBtn.disabled = false;
+                updateLogoBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Update Logo';
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+                e.preventDefault();
+                openAdminModal();
+            }
+        });
+
+        window.openAdminModal = function () {
+            adminModal.classList.add('active');
+            document.getElementById('adminUsername').focus();
+        };
+
+        window.closeAdminModal = function () {
+            adminModal.classList.remove('active');
+            loginError.style.display = 'none';
+            adminLoginForm.reset();
+        };
+
+        adminModal.addEventListener('click', function (e) {
+            if (e.target === adminModal) closeAdminModal();
+        });
+
+        adminLoginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const usernameInput = document.getElementById('adminUsername').value.trim();
+            const passwordInput = document.getElementById('adminPassword').value;
+
+            if (usernameInput === "adminrachelgardner" && passwordInput === "1234567890!@#$%^&*()") {
+                closeAdminModal();
+                adminPanel.style.display = 'block';
+                document.body.classList.add('is-admin');
+            } else {
+                loginError.style.display = 'block';
+            }
+        });
+
+        window.logoutAdmin = function () {
+            adminPanel.style.display = 'none';
+            document.body.classList.remove('is-admin');
+        };
+
+        function normalizeTitle(title) {
+            return String(title || '')
+                .trim()
+                .toLowerCase()
+                .replace(/\s+/g, ' ');
+        }
+
+        function createSeriesId() {
+            return `series_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+        }
+
+        async function findSeriesByTitle(title, mangas = null) {
+            const target = normalizeTitle(title);
+            if (!target) return null;
+
+            const list = mangas || (await getDocs(collection(db, 'mangas'))).docs.map(d => ({
+                id: d.id,
+                ...d.data()
+            }));
+
+            const match = list.find(m =>
+                normalizeTitle(m.seriesTitle || m.title) === target
+            );
+
+            return match || null;
+        }
+
+        uploadMangaForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const titleInput = document.getElementById('mangaTitle').value.trim();
+            const chapter = document.getElementById('chapterName').value.trim();
+            const files = document.getElementById('mangaFiles').files;
+
+            if (!titleInput || !chapter || files.length === 0) return;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Uploading chapter...';
+
+            try {
+                const imageUrls = [];
+                for (let i = 0; i < files.length; i++) {
+                    imageUrls.push(await uploadToImgBB(files[i]));
+                }
+
+                const existing = await findSeriesByTitle(titleInput);
+                const seriesId = existing?.seriesId || createSeriesId();
+                const seriesTitle = existing?.seriesTitle || existing?.title || titleInput;
+                const now = new Date();
+
+                await addDoc(collection(db, 'mangas'), {
+                    title: seriesTitle,
+                    chapter,
+                    seriesId,
+                    seriesTitle,
+                    images: imageUrls,
+                    views: 0,
+                    createdAt: now,
+                    updatedAt: now
+                });
+
+                uploadMangaForm.reset();
+                await renderMangaList();
+                alert(`Chapter ${chapter} published successfully!`);
+            } catch (err) {
+                console.error('Lỗi tải chapter:', err);
+                alert('Có lỗi xảy ra khi tải chapter lên!');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-upload"></i> Publish Chapter';
+            }
+        });
+
+        mergeMangaForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const targetTitle = mergeTitle.value.trim();
+            if (!targetTitle) return;
+
+            mergeMangaBtn.disabled = true;
+            mergeMangaBtn.textContent = 'Merging...';
+
+            try {
+                const querySnapshot = await getDocs(collection(db, 'mangas'));
+                const mangas = querySnapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+                const target = normalizeTitle(targetTitle);
+                const matches = mangas.filter(m =>
+                    normalizeTitle(m.title) === target ||
+                    normalizeTitle(m.seriesTitle) === target
+                );
+
+                if (matches.length < 2) {
+                    alert('Need at least 2 chapters with the same manga name to merge.');
+                    return;
+                }
+
+                const existingSeries = matches.find(m => m.seriesId);
+                const seriesId = existingSeries?.seriesId || createSeriesId();
+                const seriesTitle = existingSeries?.seriesTitle || targetTitle;
+                const now = new Date();
+
+                await Promise.all(matches.map(m => updateDoc(doc(db, 'mangas', m.id), {
+                    title: seriesTitle,
+                    seriesId,
+                    seriesTitle,
+                    updatedAt: now
+                })));
+
+                mergeMangaForm.reset();
+                await renderMangaList();
+                alert(`${matches.length} chapters with the same name have been merged into one series.`);
+            } catch (err) {
+                console.error('Lỗi gộp truyện:', err);
+                alert('Có lỗi xảy ra khi gộp truyện.');
+            } finally {
+                mergeMangaBtn.disabled = false;
+                mergeMangaBtn.innerHTML = '<i class="fa-solid fa-link"></i> Merge Same-Name Chapters';
+            }
+        });
+
+        function chapterData(manga) {
+            return {
+                id: manga.id,
+                title: manga.title || '',
+                chapter: manga.chapter || 'Chapter',
+                images: Array.isArray(manga.images) ? manga.images : [],
+                views: manga.views || 0,
+                seriesId: manga.seriesId || null,
+                seriesTitle: manga.seriesTitle || manga.title || '',
+                createdAt: manga.createdAt || null,
+                updatedAt: manga.updatedAt || manga.createdAt || null
+            };
+        }
+
+        async function renderMangaList() {
+            mangaGrid.innerHTML = '<p style="color: #64748b;">Loading manga list...</p>';
+
+            try {
+                const querySnapshot = await getDocs(collection(db, 'mangas'));
+                mangaGrid.innerHTML = '';
+
+                if (querySnapshot.empty) {
+                    mangaGrid.innerHTML = '<p style="color: #64748b;">No manga uploaded yet...</p>';
+                    return;
+                }
+
+                const mangas = [];
+                let foundRequestedManga = null;
+                const requestedMangaId = new URLSearchParams(window.location.search).get('id');
+
+                querySnapshot.forEach((docSnap) => {
+                    const manga = chapterData({ id: docSnap.id, ...docSnap.data() });
+                    mangas.push(manga);
+                    if (manga.id === requestedMangaId) foundRequestedManga = manga;
+                });
+
+                allMangaItems = mangas.slice();
+
+                const groups = new Map();
+                mangas.forEach(manga => {
+                    const groupKey = manga.seriesId || `single:${manga.id}`;
+                    if (!groups.has(groupKey)) groups.set(groupKey, []);
+                    groups.get(groupKey).push(manga);
+                });
+
+                const getTime = (item) => {
+                    const value = item.updatedAt || item.createdAt;
+                    if (!value) return 0;
+                    if (typeof value === 'object' && typeof value.seconds === 'number') {
+                        return value.seconds * 1000 + Math.floor((value.nanoseconds || 0) / 1000000);
+                    }
+                    if (typeof value === 'object' && typeof value.toMillis === 'function') {
+                        return value.toMillis();
+                    }
+                    const parsed = new Date(value).getTime();
+                    return Number.isNaN(parsed) ? 0 : parsed;
+                };
+
+                const groupedEntries = [...groups.entries()].map(([groupKey, group]) => {
+                    group.sort((a, b) => getTime(b) - getTime(a));
+                    return { groupKey, group, latestTime: getTime(group[0]) };
+                });
+
+                groupedEntries.sort((a, b) => b.latestTime - a.latestTime);
+
+                for (const { groupKey, group } of groupedEntries) {
+                    const first = group[0];
+                    const isSeries = Boolean(first.seriesId) || group.length > 1;
+                    const title = first.seriesTitle || first.title;
+                    const totalViews = group.reduce((sum, item) => sum + (item.views || 0), 0);
+
+                    const card = document.createElement('div');
+                    card.className = `manga-card${isSeries ? ' series-card' : ''}`;
+
+                    if (!isSeries) {
+                        card.innerHTML = `
+                            <button class="delete-btn" title="Delete manga">&times;</button>
+                            <button class="edit-btn" title="Edit manga"><i class="fa-solid fa-pen"></i></button>
+                            <div class="card-thumb">
+                                <img src="${first.images[0] || 'https://via.placeholder.com/180x220'}" width="180" height="220" alt="${first.title}" loading="lazy">
+                                <span class="badge pages-badge">${first.images.length} pages</span>
+                            </div>
+                            <div class="card-details">
+                                <h3 class="manga-title">${first.title}</h3>
+                                <div class="card-footer">
+                                    <span class="chapter-link">${first.chapter}</span>
+                                    <span class="views-count"><i class="fa-regular fa-eye"></i> ${first.views}</span>
+                                </div>
+                            </div>
+                        `;
+
+                        card.querySelector('.delete-btn').addEventListener('click', e => deleteManga(e, first.id));
+                        card.querySelector('.edit-btn').addEventListener('click', e => openEditModal(e, first.id, first.title, first.chapter));
+                        card.addEventListener('click', function (e) {
+                            if (e.target.closest('.delete-btn') || e.target.closest('.edit-btn')) return;
+                            openReadingLink();
+                            const newUrl = `${window.location.pathname}?id=${first.id}`;
+                            history.pushState({ view: 'reader', mangaId: first.id }, '', newUrl);
+                            openComicReader(first.id, first.title, first.chapter, first.images, false);
+                        });
+                    } else {
+                        const latestChapter = first;
+                        const firstChapter = getFirstChapter(group);
+
+                        card.innerHTML = `
+                            <div class="card-thumb">
+                                <img src="${latestChapter.images[0] || 'https://via.placeholder.com/180x220'}" width="180" height="220" alt="${title}" loading="lazy">
+                            </div>
+                            <div class="card-details">
+                                <h3 class="manga-title">${title}</h3>
+                                <div class="card-footer">
+                                    <span class="chapter-badge">${latestChapter.chapter}</span>
+                                    <span class="views-count"><i class="fa-regular fa-eye"></i> ${totalViews}</span>
+                                </div>
+                            </div>
+                        `;
+
+                        card.addEventListener('click', function () {
+                            openReadingLink();
+                            const newUrl = `${window.location.pathname}?id=${firstChapter.id}`;
+                            history.pushState({ view: 'reader', mangaId: firstChapter.id }, '', newUrl);
+                            openComicReader(
+                                firstChapter.id,
+                                firstChapter.title,
+                                firstChapter.chapter,
+                                firstChapter.images,
+                                false
+                            );
+                        });
+                    }
+
+                    mangaGrid.appendChild(card);
+                }
+
+                if (foundRequestedManga) {
+                    openComicReader(
+                        foundRequestedManga.id,
+                        foundRequestedManga.title,
+                        foundRequestedManga.chapter,
+                        foundRequestedManga.images,
+                        true
+                    );
+                }
+
+                filterManga();
+            } catch (err) {
+                console.error('Lỗi lấy danh sách truyện:', err);
+            }
+        }
+
+        window.deleteManga = async function (event, id) {
+            event.stopPropagation();
+            if (confirm('Are you sure you want to delete this manga?')) {
+                try {
+                    await deleteDoc(doc(db, "mangas", id));
+                    renderMangaList();
+                } catch (e) {
+                    alert('Lỗi khi xóa truyện!');
+                }
+            }
+        };
+
+        window.openEditModal = function (event, id, title, chapter) {
+            event.stopPropagation();
+            document.getElementById('editMangaId').value = id;
+            document.getElementById('editMangaTitle').value = title;
+            document.getElementById('editChapterName').value = chapter;
+            document.getElementById('editMangaFiles').value = '';
+            editModal.classList.add('active');
+        };
+
+        window.closeEditModal = function () {
+            editModal.classList.remove('active');
+        };
+
+        editModal.addEventListener('click', function (e) {
+            if (e.target === editModal) closeEditModal();
+        });
+
+        editMangaForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const id = document.getElementById('editMangaId').value;
+            const newTitle = document.getElementById('editMangaTitle').value;
+            const newChapter = document.getElementById('editChapterName').value;
+            const files = document.getElementById('editMangaFiles').files;
+
+            saveEditBtn.disabled = true;
+            saveEditBtn.textContent = 'Saving...';
+
+            try {
+                const mangaRef = doc(db, "mangas", id);
+                const updateData = {
+                    title: newTitle,
+                    chapter: newChapter,
+                    updatedAt: new Date()
+                };
+
+                if (files.length > 0) {
+                    const imageUrls = [];
+                    for (let i = 0; i < files.length; i++) {
+                        const url = await uploadToImgBB(files[i]);
+                        imageUrls.push(url);
+                    }
+                    updateData.images = imageUrls;
+                }
+
+                await updateDoc(mangaRef, updateData);
+                closeEditModal();
+                renderMangaList();
+                alert('Manga updated successfully!');
+            } catch (err) {
+                console.error("Lỗi cập nhật truyện:", err);
+                alert('Có lỗi xảy ra khi cập nhật truyện!');
+            } finally {
+                saveEditBtn.disabled = false;
+                saveEditBtn.textContent = 'Save Changes';
+            }
+        });
+
+        window.resetAllViews = async function () {
+            if (!confirm('Are you sure you want to reset the view count of ALL manga to 0?')) return;
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "mangas"));
+                if (querySnapshot.empty) {
+                    alert('No manga found to reset.');
+                    return;
+                }
+
+                const updatePromises = [];
+                querySnapshot.forEach((docSnap) => {
+                    const mangaRef = doc(db, "mangas", docSnap.id);
+                    updatePromises.push(updateDoc(mangaRef, {views: 0}));
+                });
+
+                await Promise.all(updatePromises);
+                renderMangaList();
+                alert('Successfully reset all manga views to 0!');
+            } catch (err) {
+                console.error("Lỗi reset lượt xem:", err);
+                alert('An error occurred while resetting views.');
+            }
+        };
+
+        window.filterManga = function () {
+            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+
+            const cards = document.querySelectorAll('.manga-card');
+            let matchedCount = 0;
+
+            cards.forEach(card => {
+                const titleEl = card.querySelector('.manga-title');
+                const chapterEl = card.querySelector('.chapter-link, .chapter-badge');
+                const title = titleEl ? titleEl.textContent.toLowerCase() : '';
+                const chapter = chapterEl ? chapterEl.textContent.toLowerCase() : '';
+
+                if (title.includes(keyword) || chapter.includes(keyword)) {
+                    card.style.display = 'block';
+                    matchedCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            let noResultMsg = document.getElementById('noSearchResult');
+            if (matchedCount === 0 && cards.length > 0 && keyword !== "") {
+                if (!noResultMsg) {
+                    noResultMsg = document.createElement('p');
+                    noResultMsg.id = 'noSearchResult';
+                    noResultMsg.style.color = '#64748b';
+                    noResultMsg.style.gridColumn = '1 / -1';
+                    noResultMsg.style.textAlign = 'center';
+                    noResultMsg.style.padding = '20px 0';
+                    mangaGrid.appendChild(noResultMsg);
+                }
+                noResultMsg.textContent = `No manga found matching key word "${keyword}"`;
+                noResultMsg.style.display = 'block';
+            } else if (noResultMsg) {
+                noResultMsg.style.display = 'none';
+            }
+        };
+
+        function getReaderTime(item) {
+            const value = item.updatedAt || item.createdAt;
+            if (!value) return 0;
+            if (typeof value === 'object' && typeof value.seconds === 'number') {
+                return value.seconds * 1000 + Math.floor((value.nanoseconds || 0) / 1000000);
+            }
+            if (typeof value === 'object' && typeof value.toMillis === 'function') return value.toMillis();
+            const parsed = new Date(value).getTime();
+            return Number.isNaN(parsed) ? 0 : parsed;
+        }
+
+        function getChapterNumber(chapter) {
+            const match = String(chapter || '').match(/(?:chapter|ch\.?|ep(?:isode)?)\s*(\d+(?:\.\d+)?)/i);
+            return match ? Number(match[1]) : null;
+        }
+
+        function getFirstChapter(chapters) {
+            return chapters.slice().sort((a, b) => {
+                const na = getChapterNumber(a.chapter);
+                const nb = getChapterNumber(b.chapter);
+
+                if (na !== null && nb !== null && na !== nb) return na - nb;
+                if (na !== null && nb === null) return -1;
+                if (na === null && nb !== null) return 1;
+                return getReaderTime(a) - getReaderTime(b);
+            })[0];
+        }
+
+        function normalizeSeriesTitle(value) {
+            return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+        }
+
+        function getSeriesChapters(manga) {
+            if (!manga) return [];
+            const key = normalizeSeriesTitle(manga.seriesTitle || manga.title);
+
+            let chapters = allMangaItems.filter(item => {
+                if (manga.seriesId && item.seriesId) return item.seriesId === manga.seriesId;
+                return normalizeSeriesTitle(item.seriesTitle || item.title) === key;
+            });
+
+            if (!chapters.some(item => item.id === manga.id)) chapters.push(manga);
+            return chapters.sort((a, b) => getReaderTime(b) - getReaderTime(a));
+        }
+
+        function renderChapterNavigation() {
+            readerChapterSelect.innerHTML = '';
+            readerChapterMenu.innerHTML = '';
+
+            currentSeriesChapters.forEach((chapter, index) => {
+                const label = chapter.chapter || `Chapter ${index + 1}`;
+
+                const option = document.createElement('option');
+                option.value = chapter.id;
+                option.textContent = label;
+                readerChapterSelect.appendChild(option);
+
+                const item = document.createElement('button');
+                item.type = 'button';
+                item.textContent = label;
+                item.addEventListener('click', () => {
+                    switchToChapter(index);
+                    readerChapterMenu.classList.remove('active');
+                });
+                readerChapterMenu.appendChild(item);
+            });
+
+            readerChapterSelect.value = currentMangaId;
+            [...readerChapterMenu.children].forEach((item, index) => {
+                item.classList.toggle('active', index === currentChapterIndex);
+            });
+
+            prevChapterBtn.disabled = currentChapterIndex >= currentSeriesChapters.length - 1;
+            nextChapterBtn.disabled = currentChapterIndex <= 0;
+        }
+
+        function switchToChapter(index) {
+            if (index < 0 || index >= currentSeriesChapters.length) return;
+            const chapter = currentSeriesChapters[index];
+            if (!chapter || chapter.id === currentMangaId) {
+                currentChapterIndex = index;
+                renderChapterNavigation();
+                return;
+            }
+
+            currentChapterIndex = index;
+            const newUrl = `${window.location.pathname}?id=${chapter.id}`;
+            history.pushState({ view: 'reader', mangaId: chapter.id }, '', newUrl);
+            openComicReader(chapter.id, chapter.title, chapter.chapter, chapter.images, false);
+        }
+
+        readerChapterSelect.addEventListener('change', function () {
+            switchToChapter(currentSeriesChapters.findIndex(ch => ch.id === this.value));
+        });
+
+        chapterMenuBtn.addEventListener('click', function (event) {
+            event.stopPropagation();
+            readerChapterMenu.classList.toggle('active');
+        });
+
+        prevChapterBtn.addEventListener('click', () => switchToChapter(currentChapterIndex + 1));
+        nextChapterBtn.addEventListener('click', () => switchToChapter(currentChapterIndex - 1));
+
+        document.addEventListener('click', function (event) {
+            if (!readerChapterMenu.contains(event.target) && !chapterMenuBtn.contains(event.target)) {
+                readerChapterMenu.classList.remove('active');
+            }
+        });
+
+        window.openComicReader = async function (id, title, chapter, imageUrls, isDirectLoad = false) {
+            if (!isDirectLoad) {
+                try {
+                    await updateDoc(doc(db, "mangas", id), { views: increment(1) });
+                } catch (err) {
+                    console.error("Lỗi tăng lượt xem:", err);
+                }
+            }
+
+            currentMangaId = id;
+            currentReaderImages = Array.isArray(imageUrls) ? imageUrls : [];
+            currentMangaTitle = title || "";
+            currentMangaChapter = chapter || "";
+
+            const currentManga = allMangaItems.find(item => item.id === id) || {
+                id, title, chapter, images: currentReaderImages
+            };
+            currentSeriesChapters = getSeriesChapters(currentManga);
+            currentChapterIndex = currentSeriesChapters.findIndex(item => item.id === id);
+            if (currentChapterIndex < 0) currentChapterIndex = 0;
+
+            mangaListView.style.display = 'none';
+            readerView.classList.add('active');
+            readerTitle.textContent = `${currentMangaTitle} - ${currentMangaChapter}`;
+            renderChapterNavigation();
+            renderAllReaderPages();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.renderAllReaderPages = function () {
+            const container = document.getElementById('readerPages');
+            const footer = document.getElementById('readerFooter');
+
+            container.innerHTML = '';
+
+            if (!currentReaderImages.length) {
+                container.innerHTML = '<div style="color: #ef4444; text-align: center; padding: 30px;">No pages available.</div>';
+                if (footer) footer.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> No pages available';
+                return;
+            }
+
+            if (footer) {
+                footer.innerHTML = `<i class="fa-solid fa-arrows-up-down"></i> Scroll down to read all ${currentReaderImages.length} pages`;
+            }
+
+            currentReaderImages.forEach((imageUrl, index) => {
+                const page = document.createElement('div');
+                page.className = 'reader-page';
+                page.id = `reader-page-${index + 1}`;
+
+                const loading = document.createElement('div');
+                loading.className = 'reader-page-loading';
+                loading.textContent = `Loading page ${index + 1}...`;
+
+                const img = document.createElement('img');
+                img.alt = `Page ${index + 1}`;
+                img.loading = index < 2 ? 'eager' : 'lazy';
+                img.decoding = 'async';
+                img.src = imageUrl;
+
+                img.addEventListener('load', function () {
+                    loading.remove();
+                });
+
+                img.addEventListener('error', function () {
+                    loading.innerHTML = `Failed to load page ${index + 1}. <button type="button" style="margin-left: 8px; background: #38bdf8; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #0f172a;">Retry</button>`;
+                    const retryButton = loading.querySelector('button');
+                    retryButton.addEventListener('click', function (event) {
+                        event.stopPropagation();
+                        loading.innerHTML = `Loading page ${index + 1}...`;
+                        img.src = '';
+                        setTimeout(() => {
+                            img.src = imageUrl;
+                        }, 50);
+                    });
+                });
+
+                page.appendChild(loading);
+                page.appendChild(img);
+                container.appendChild(page);
+            });
+        };
+
+        window.showMainList = function (event) {
+            if (event) event.preventDefault();
+            window.history.pushState({}, '', window.location.pathname);
+            readerView.classList.remove('active');
+            mangaListView.style.display = 'block';
+        };
+
+        window.addEventListener('popstate', function () {
+            const id = new URLSearchParams(window.location.search).get('id');
+            if (!id) {
+                readerView.classList.remove('active');
+                mangaListView.style.display = 'block';
+                return;
+            }
+            const manga = allMangaItems.find(item => item.id === id);
+            if (manga) openComicReader(manga.id, manga.title, manga.chapter, manga.images, true);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSavedLogo();
+            renderMangaList();
+        });
+    </script>
+</body>
+
+</html>
