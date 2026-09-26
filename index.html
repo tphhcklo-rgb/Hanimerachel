@@ -33,8 +33,7 @@
     <link rel="icon" id="siteFavicon" href="https://via.placeholder.com/36">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Đã cập nhật tag script mới theo yêu cầu của bạn -->
-    <script src="https://5gvci.com/act/files/tag.min.js?z=11884470" data-cfasync="false" async></script>
+    <!-- Đã gỡ bỏ script Push Notification (tag.min.js) để tránh hiện thông báo đẩy ở góc màn hình -->
     
     <script>
         (function () {
@@ -801,6 +800,91 @@
             border-color: #38bdf8;
         }
 
+        /* ===== CHAPTER ORDER ADMIN ===== */
+        .chapter-order-box {
+            background: #0b111e;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .chapter-order-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 360px;
+            overflow-y: auto;
+            margin-top: 12px;
+        }
+
+        .chapter-order-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 10px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 7px;
+            cursor: grab;
+            user-select: none;
+            transition: opacity .15s, border-color .15s, transform .15s;
+        }
+
+        .chapter-order-item:active { cursor: grabbing; }
+        .chapter-order-item.dragging { opacity: .45; border-color: #38bdf8; }
+        .chapter-order-item.drag-over { border-color: #38bdf8; transform: translateY(-1px); }
+
+        .chapter-drag-icon {
+            color: #64748b;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .chapter-order-number {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #0f172a;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .chapter-order-name {
+            flex: 1;
+            min-width: 0;
+            color: #e2e8f0;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chapter-order-hint {
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 7px;
+        }
+
+        .save-order-btn {
+            margin-top: 12px;
+            width: 100%;
+            background: #10b981;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .save-order-btn:disabled { opacity: .6; cursor: not-allowed; }
+
         /* ===== MODALS ===== */
         .admin-modal {
             display: none;
@@ -951,6 +1035,23 @@
                 </div>
                 <button type="submit" class="update-logo-btn" id="mergeMangaBtn"><i class="fa-solid fa-link"></i> Merge Same-Name Chapters</button>
             </form>
+
+            <hr class="admin-divider">
+
+            <div class="admin-section-title"><i class="fa-solid fa-up-down"></i> CUSTOM CHAPTER ORDER</div>
+            <div class="admin-form-group">
+                <label for="orderSeriesSelect">Select Manga / Series</label>
+                <select id="orderSeriesSelect">
+                    <option value="">-- Select a manga --</option>
+                </select>
+            </div>
+            <div class="chapter-order-box">
+                <div id="chapterOrderList" class="chapter-order-list">
+                    <div style="color:#64748b;font-size:13px;text-align:center;padding:14px;">Select a manga to arrange its chapters.</div>
+                </div>
+                <div class="chapter-order-hint"><i class="fa-solid fa-grip-lines"></i> Drag chapters up or down. The order is saved for everyone.</div>
+                <button type="button" class="save-order-btn" id="saveChapterOrderBtn"><i class="fa-solid fa-floppy-disk"></i> Save Chapter Order</button>
+            </div>
 
             <hr class="admin-divider">
 
@@ -1106,6 +1207,9 @@
         const mergeMangaForm = document.getElementById('mergeMangaForm');
         const mergeTitle = document.getElementById('mergeTitle');
         const mergeMangaBtn = document.getElementById('mergeMangaBtn');
+        const orderSeriesSelect = document.getElementById('orderSeriesSelect');
+        const chapterOrderList = document.getElementById('chapterOrderList');
+        const saveChapterOrderBtn = document.getElementById('saveChapterOrderBtn');
         const chapterMenuBtn = document.getElementById('chapterMenuBtn');
         const readerChapterSelect = document.getElementById('readerChapterSelect');
         const prevChapterBtn = document.getElementById('prevChapterBtn');
@@ -1373,6 +1477,7 @@
                 views: manga.views || 0,
                 seriesId: manga.seriesId || null,
                 seriesTitle: manga.seriesTitle || manga.title || '',
+                chapterOrder: manga.chapterOrder ?? null,
                 createdAt: manga.createdAt || null,
                 updatedAt: manga.updatedAt || manga.createdAt || null
             };
@@ -1401,6 +1506,8 @@
                 });
 
                 allMangaItems = mangas.slice();
+                populateChapterOrderSelector();
+                renderChapterOrderEditor();
 
                 const groups = new Map();
                 mangas.forEach(manga => {
@@ -1662,16 +1769,26 @@
             return match ? Number(match[1]) : null;
         }
 
-        function getFirstChapter(chapters) {
-            return chapters.slice().sort((a, b) => {
-                const na = getChapterNumber(a.chapter);
-                const nb = getChapterNumber(b.chapter);
+        function compareChapterOrder(a, b) {
+            const ao = Number.isFinite(Number(a.chapterOrder)) ? Number(a.chapterOrder) : null;
+            const bo = Number.isFinite(Number(b.chapterOrder)) ? Number(b.chapterOrder) : null;
 
-                if (na !== null && nb !== null && na !== nb) return na - nb;
-                if (na !== null && nb === null) return -1;
-                if (na === null && nb !== null) return 1;
-                return getReaderTime(a) - getReaderTime(b);
-            })[0];
+            // If both chapters have a manually saved order, use it.
+            if (ao !== null && bo !== null && ao !== bo) return ao - bo;
+            if (ao !== null && bo === null) return -1;
+            if (ao === null && bo !== null) return 1;
+
+            // Existing chapters without an order keep the old sensible fallback.
+            const na = getChapterNumber(a.chapter);
+            const nb = getChapterNumber(b.chapter);
+            if (na !== null && nb !== null && na !== nb) return na - nb;
+            if (na !== null && nb === null) return -1;
+            if (na === null && nb !== null) return 1;
+            return getReaderTime(a) - getReaderTime(b);
+        }
+
+        function getFirstChapter(chapters) {
+            return chapters.slice().sort(compareChapterOrder)[0];
         }
 
         function normalizeSeriesTitle(value) {
@@ -1688,8 +1805,148 @@
             });
 
             if (!chapters.some(item => item.id === manga.id)) chapters.push(manga);
-            return chapters.sort((a, b) => getReaderTime(b) - getReaderTime(a));
+            return chapters.sort(compareChapterOrder);
         }
+
+        function getSeriesKey(manga) {
+            return manga?.seriesId || `title:${normalizeSeriesTitle(manga?.seriesTitle || manga?.title)}`;
+        }
+
+        function populateChapterOrderSelector() {
+            if (!orderSeriesSelect) return;
+            const groups = new Map();
+
+            allMangaItems.forEach(item => {
+                const key = getSeriesKey(item);
+                if (!groups.has(key)) groups.set(key, []);
+                groups.get(key).push(item);
+            });
+
+            const previous = orderSeriesSelect.value;
+            orderSeriesSelect.innerHTML = '<option value="">-- Select a manga --</option>';
+
+            [...groups.entries()]
+                .filter(([, chapters]) => chapters.length > 0)
+                .sort((a, b) => {
+                    const ta = a[1][0].seriesTitle || a[1][0].title || '';
+                    const tb = b[1][0].seriesTitle || b[1][0].title || '';
+                    return ta.localeCompare(tb);
+                })
+                .forEach(([key, chapters]) => {
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = `${chapters[0].seriesTitle || chapters[0].title} (${chapters.length} chapter${chapters.length > 1 ? 's' : ''})`;
+                    orderSeriesSelect.appendChild(option);
+                });
+
+            if ([...orderSeriesSelect.options].some(o => o.value === previous)) {
+                orderSeriesSelect.value = previous;
+            }
+        }
+
+        function renderChapterOrderEditor() {
+            if (!chapterOrderList || !orderSeriesSelect) return;
+            const key = orderSeriesSelect.value;
+            chapterOrderList.innerHTML = '';
+
+            if (!key) {
+                chapterOrderList.innerHTML = '<div style="color:#64748b;font-size:13px;text-align:center;padding:14px;">Select a manga to arrange its chapters.</div>';
+                return;
+            }
+
+            const chapters = allMangaItems
+                .filter(item => getSeriesKey(item) === key)
+                .sort(compareChapterOrder);
+
+            chapters.forEach((chapter, index) => {
+                const item = document.createElement('div');
+                item.className = 'chapter-order-item';
+                item.draggable = true;
+                item.dataset.id = chapter.id;
+                item.innerHTML = `
+                    <i class="fa-solid fa-grip-lines chapter-drag-icon"></i>
+                    <span class="chapter-order-number">${index + 1}</span>
+                    <span class="chapter-order-name"></span>
+                `;
+                item.querySelector('.chapter-order-name').textContent = chapter.chapter || `Chapter ${index + 1}`;
+
+                item.addEventListener('dragstart', () => {
+                    item.classList.add('dragging');
+                    chapterOrderList.dataset.draggingId = chapter.id;
+                });
+                item.addEventListener('dragend', () => {
+                    item.classList.remove('dragging');
+                    chapterOrderList.dataset.draggingId = '';
+                    chapterOrderList.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+                    updateChapterOrderNumbers();
+                });
+                item.addEventListener('dragover', event => {
+                    event.preventDefault();
+                    if (item.dataset.id !== chapterOrderList.dataset.draggingId) item.classList.add('drag-over');
+                });
+                item.addEventListener('dragleave', () => item.classList.remove('drag-over'));
+                item.addEventListener('drop', event => {
+                    event.preventDefault();
+                    item.classList.remove('drag-over');
+                    const draggingId = chapterOrderList.dataset.draggingId;
+                    const dragging = chapterOrderList.querySelector(`[data-id="${CSS.escape(draggingId)}"]`);
+                    if (!dragging || dragging === item) return;
+
+                    const rect = item.getBoundingClientRect();
+                    const insertBefore = event.clientY < rect.top + rect.height / 2;
+                    if (insertBefore) chapterOrderList.insertBefore(dragging, item);
+                    else chapterOrderList.insertBefore(dragging, item.nextSibling);
+                    updateChapterOrderNumbers();
+                });
+
+                chapterOrderList.appendChild(item);
+            });
+
+            updateChapterOrderNumbers();
+        }
+
+        function updateChapterOrderNumbers() {
+            if (!chapterOrderList) return;
+            [...chapterOrderList.querySelectorAll('.chapter-order-item')].forEach((item, index) => {
+                const number = item.querySelector('.chapter-order-number');
+                if (number) number.textContent = index + 1;
+            });
+        }
+
+        orderSeriesSelect?.addEventListener('change', renderChapterOrderEditor);
+
+        saveChapterOrderBtn?.addEventListener('click', async function () {
+            const items = [...chapterOrderList.querySelectorAll('.chapter-order-item')];
+            if (!items.length) return;
+
+            saveChapterOrderBtn.disabled = true;
+            saveChapterOrderBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+            try {
+                await Promise.all(items.map((item, index) =>
+                    updateDoc(doc(db, 'mangas', item.dataset.id), {
+                        chapterOrder: index,
+                        updatedAt: new Date()
+                    })
+                ));
+
+                const orderById = new Map(items.map((item, index) => [item.dataset.id, index]));
+                allMangaItems.forEach(item => {
+                    if (orderById.has(item.id)) item.chapterOrder = orderById.get(item.id);
+                });
+
+                await renderMangaList();
+                populateChapterOrderSelector();
+                orderSeriesSelect.value = [...orderSeriesSelect.options].some(o => o.value === orderSeriesSelect.value) ? orderSeriesSelect.value : '';
+                renderChapterOrderEditor();
+                alert('Chapter order saved successfully!');
+            } catch (err) {
+                console.error('Lỗi lưu thứ tự chapter:', err);
+                alert('Có lỗi xảy ra khi lưu thứ tự chapter.');
+            } finally {
+                saveChapterOrderBtn.disabled = false;
+                saveChapterOrderBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Chapter Order';
+            }
+        });
 
         function renderChapterNavigation() {
             readerChapterSelect.innerHTML = '';
