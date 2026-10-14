@@ -33,12 +33,12 @@
     <link rel="icon" id="siteFavicon" href="https://via.placeholder.com/36">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Đã gỡ bỏ script Push Notification (tag.min.js) để tránh hiện thông báo đẩy ở góc màn hình -->
+    <!-- Đã gỡ bỏ script Push Notification (tag.min.js) để tránh hiện thông báo đẩy ở góc màn hình[cite: 1] -->
     
     <script>
         (function () {
             const MAX_CLICKS = 5;
-            const COOLDOWN_TIME = 15000; // 15 giây
+            const COOLDOWN_TIME = 15000; // 15 giây[cite: 1]
             const ZONE_ID = '11877908';
             const SCRIPT_URL = 'https://al5sm.com/tag.min.js';
 
@@ -216,8 +216,8 @@
             opacity: 0.9;
         }
 
-        .telegram-btn {
-            background-color: #229ed9;
+        .facebook-btn {
+            background-color: #1877f2;
             color: #ffffff;
             padding: 10px 18px;
             border-radius: 20px;
@@ -230,7 +230,7 @@
             transition: opacity 0.2s;
         }
 
-        .telegram-btn:hover {
+        .facebook-btn:hover {
             opacity: 0.9;
         }
 
@@ -497,6 +497,45 @@
         body.is-admin .delete-btn,
         body.is-admin .edit-btn {
             display: flex;
+        }
+
+        /* ===== PAGINATION ===== */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .page-btn {
+            background-color: #1e293b;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border-color: #38bdf8;
+        }
+
+        .page-btn.active {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border-color: #38bdf8;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
         }
 
         /* ===== READER ===== */
@@ -993,8 +1032,8 @@
             </div>
 
             <div class="nav-actions">
-                <a href="https://t.me/+S6EiqeOBhpVmNjg1" target="_blank" rel="noopener noreferrer"
-                    class="telegram-btn"><i class="fa-brands fa-telegram"></i> Telegram</a>
+                <a href="https://www.facebook.com/profile.php?id=61593038136415" target="_blank" rel="noopener noreferrer"
+                    class="facebook-btn"><i class="fa-brands fa-facebook"></i> Facebook</a>
                 <a href="https://www.patreon.com/cw/rachelanimation" target="_blank" rel="noopener noreferrer"
                     class="support-btn">Support me</a>
             </div>
@@ -1092,6 +1131,7 @@
             </div>
             <hr class="divider">
             <div class="manga-grid" id="mangaGrid"></div>
+            <div id="paginationContainer" class="pagination-container"></div>
         </div>
 
         <div class="reader-view" id="readerView">
@@ -1223,6 +1263,9 @@
         let allMangaItems = [];
         let currentSeriesChapters = [];
         let currentChapterIndex = 0;
+        
+        let currentPage = 1;
+        const ITEMS_PER_PAGE = 15;
 
         const READING_LINK_URL = "https://omg10.com/4/11878101";
         const READING_LINK_COOLDOWN = 30000;
@@ -1485,6 +1528,8 @@
 
         async function renderMangaList() {
             mangaGrid.innerHTML = '<p style="color: #64748b;">Loading manga list...</p>';
+            const paginationContainer = document.getElementById('paginationContainer');
+            if (paginationContainer) paginationContainer.innerHTML = '';
 
             try {
                 const querySnapshot = await getDocs(collection(db, 'mangas'));
@@ -1536,7 +1581,17 @@
 
                 groupedEntries.sort((a, b) => b.latestTime - a.latestTime);
 
-                for (const { groupKey, group } of groupedEntries) {
+                const totalItems = groupedEntries.length;
+                const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
+                
+                if (currentPage > totalPages) currentPage = totalPages;
+                if (currentPage < 1) currentPage = 1;
+
+                const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+                const endIndex = startIndex + ITEMS_PER_PAGE;
+                const paginatedEntries = groupedEntries.slice(startIndex, endIndex);
+
+                for (const { groupKey, group } of paginatedEntries) {
                     const first = group[0];
                     const isSeries = Boolean(first.seriesId) || group.length > 1;
                     const title = first.seriesTitle || first.title;
@@ -1576,6 +1631,8 @@
                         const firstChapter = getFirstChapter(group);
 
                         card.innerHTML = `
+                            <button class="delete-btn" title="Delete series/latest chapter">&times;</button>
+                            <button class="edit-btn" title="Edit latest chapter"><i class="fa-solid fa-pen"></i></button>
                             <div class="card-thumb">
                                 <img src="${latestChapter.images[0] || 'https://via.placeholder.com/180x220'}" width="180" height="220" alt="${title}" loading="lazy">
                             </div>
@@ -1588,7 +1645,11 @@
                             </div>
                         `;
 
-                        card.addEventListener('click', function () {
+                        card.querySelector('.delete-btn').addEventListener('click', e => deleteManga(e, latestChapter.id));
+                        card.querySelector('.edit-btn').addEventListener('click', e => openEditModal(e, latestChapter.id, title, latestChapter.chapter));
+
+                        card.addEventListener('click', function (e) {
+                            if (e.target.closest('.delete-btn') || e.target.closest('.edit-btn')) return;
                             openReadingLink();
                             const newUrl = `${window.location.pathname}?id=${firstChapter.id}`;
                             history.pushState({ view: 'reader', mangaId: firstChapter.id }, '', newUrl);
@@ -1603,6 +1664,28 @@
                     }
 
                     mangaGrid.appendChild(card);
+                }
+
+                if (totalPages > 1 && paginationContainer) {
+                    let paginationHTML = `
+                        <button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">
+                            <i class="fa-solid fa-chevron-left"></i> Prev
+                        </button>
+                    `;
+
+                    for (let i = 1; i <= totalPages; i++) {
+                        paginationHTML += `
+                            <button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>
+                        `;
+                    }
+
+                    paginationHTML += `
+                        <button class="page-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">
+                            Next <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    `;
+
+                    paginationContainer.innerHTML = paginationHTML;
                 }
 
                 if (foundRequestedManga) {
@@ -1620,6 +1703,12 @@
                 console.error('Lỗi lấy danh sách truyện:', err);
             }
         }
+
+        window.changePage = function (page) {
+            currentPage = page;
+            renderMangaList();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
 
         window.deleteManga = async function (event, id) {
             event.stopPropagation();
@@ -1773,12 +1862,10 @@
             const ao = Number.isFinite(Number(a.chapterOrder)) ? Number(a.chapterOrder) : null;
             const bo = Number.isFinite(Number(b.chapterOrder)) ? Number(b.chapterOrder) : null;
 
-            // If both chapters have a manually saved order, use it.
             if (ao !== null && bo !== null && ao !== bo) return ao - bo;
             if (ao !== null && bo === null) return -1;
             if (ao === null && bo !== null) return 1;
 
-            // Existing chapters without an order keep the old sensible fallback.
             const na = getChapterNumber(a.chapter);
             const nb = getChapterNumber(b.chapter);
             if (na !== null && nb !== null && na !== nb) return na - nb;
