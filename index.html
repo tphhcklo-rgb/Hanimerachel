@@ -69,6 +69,9 @@
             }
 
             function clickGate(event) {
+                // Nếu đang là admin thì bỏ qua, không kích hoạt quảng cáo
+                if (document.body.classList.contains('is-admin')) return;
+
                 if (event.__popunderGateChecked) return;
                 event.__popunderGateChecked = true;
 
@@ -81,6 +84,9 @@
             }
 
             function loadPopunderScript() {
+                // Nếu đang là admin thì không tải script quảng cáo
+                if (document.body.classList.contains('is-admin')) return;
+
                 if (document.getElementById('hanimerachel-popunder-script')) return;
 
                 const script = document.createElement('script');
@@ -1167,7 +1173,7 @@
 
     <div class="admin-modal" id="adminModal">
         <div class="admin-box">
-            <button class="close-modal-btn" onclick="closeAdminModal()">&times;</button>
+            <button class="close-modal-btn" onclick="closeAdminModal()">×</button>
             <h3><i class="fa-solid fa-user-shield"></i> Admin Login</h3>
             <form id="adminLoginForm">
                 <div class="input-group">
@@ -1186,7 +1192,7 @@
 
     <div class="admin-modal" id="editModal">
         <div class="admin-box" style="max-width: 450px;">
-            <button class="close-modal-btn" onclick="closeEditModal()">&times;</button>
+            <button class="close-modal-btn" onclick="closeEditModal()">×</button>
             <h3><i class="fa-solid fa-pen-to-square"></i> Edit Manga</h3>
             <form id="editMangaForm">
                 <input type="hidden" id="editMangaId">
@@ -1274,6 +1280,9 @@
         const READING_LINK_TIME_KEY = "hanimerachel_reading_link_time";
 
         function openReadingLink() {
+            // Nếu tài khoản là admin thì không mở link quảng cáo ngoài
+            if (document.body.classList.contains('is-admin')) return;
+
             const lastTime = parseInt(localStorage.getItem(READING_LINK_TIME_KEY) || "0", 10);
             const now = Date.now();
 
@@ -1605,7 +1614,7 @@
 
                     if (!isSeries) {
                         card.innerHTML = `
-                            <button class="delete-btn" title="Delete manga">&times;</button>
+                            <button class="delete-btn" title="Delete manga">×</button>
                             <button class="edit-btn" title="Edit manga"><i class="fa-solid fa-pen"></i></button>
                             <div class="card-thumb">
                                 <img src="${first.images[0] || 'https://via.placeholder.com/180x220'}" width="180" height="220" alt="${first.title}" loading="lazy">
@@ -1634,7 +1643,7 @@
                         const firstChapter = getFirstChapter(group);
 
                         card.innerHTML = `
-                            <button class="delete-btn" title="Delete series/latest chapter">&times;</button>
+                            <button class="delete-btn" title="Delete series/latest chapter">×</button>
                             <button class="edit-btn" title="Edit latest chapter"><i class="fa-solid fa-pen"></i></button>
                             <div class="card-thumb">
                                 <img src="${latestChapter.images[0] || 'https://via.placeholder.com/180x220'}" width="180" height="220" alt="${title}" loading="lazy">
@@ -2168,7 +2177,6 @@
                 function retryImage(manual = false) {
                     loading.textContent = `Loading page ${index + 1}...`;
                     if (manual) retryCount = 0;
-                    // Add a temporary query parameter to avoid reusing a cached failed response.
                     try {
                         const retryUrl = new URL(imageUrl, window.location.href);
                         retryUrl.searchParams.set('_img_retry', `${Date.now()}_${retryCount}`);
