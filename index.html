@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Hanimerachel - Read Latest Manga Online</title>
+    <title id="pageTitle">Hanimerachel - Đọc Truyện Tranh Online</title>
     <meta name="description"
-        content="Explore and read the latest manga updates online on Hanimerachel with high quality images and smooth reader experience.">
+        content="Khám phá và đọc các chương truyện tranh cập nhật mới nhất trên Hanimerachel với chất lượng hình ảnh cao và trải nghiệm mượt mà.">
     <link rel="canonical" href="https://hanimerachel.com/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hanimerachel.com/">
-    <meta property="og:title" content="Hanimerachel - Read Latest Manga Online">
-    <meta property="og:description" content="Explore and read the latest manga updates online on Hanimerachel.">
+    <meta property="og:title" content="Hanimerachel - Đọc Truyện Tranh Online">
+    <meta property="og:description" content="Khám phá và đọc các chương truyện tranh cập nhật mới nhất trên Hanimerachel.">
     <meta property="og:image" content="https://via.placeholder.com/1200x630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Hanimerachel - Read Latest Manga Online">
-    <meta name="twitter:description" content="Explore and read the latest manga updates online on Hanimerachel.">
+    <meta name="twitter:title" content="Hanimerachel - Đọc Truyện Tranh Online">
+    <meta name="twitter:description" content="Khám phá và đọc các chương truyện tranh cập nhật mới nhất trên Hanimerachel.">
     <meta name="twitter:image" content="https://via.placeholder.com/1200x630">
     <script type="application/ld+json">
     {
@@ -69,7 +69,6 @@
             }
 
             function clickGate(event) {
-                // Nếu đang là admin thì bỏ qua, không kích hoạt quảng cáo
                 if (document.body.classList.contains('is-admin')) return;
 
                 if (event.__popunderGateChecked) return;
@@ -84,7 +83,6 @@
             }
 
             function loadPopunderScript() {
-                // Nếu đang là admin thì không tải script quảng cáo
                 if (document.body.classList.contains('is-admin')) return;
 
                 if (document.getElementById('hanimerachel-popunder-script')) return;
@@ -206,22 +204,6 @@
             gap: 12px;
         }
 
-        .support-btn {
-            background-color: #ff6b4a;
-            color: #ffffff;
-            padding: 10px 22px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-block;
-            transition: opacity 0.2s;
-        }
-
-        .support-btn:hover {
-            opacity: 0.9;
-        }
-
         .facebook-btn {
             background-color: #1877f2;
             color: #ffffff;
@@ -237,6 +219,24 @@
         }
 
         .facebook-btn:hover {
+            opacity: 0.9;
+        }
+
+        .youtube-btn {
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.2s;
+        }
+
+        .youtube-btn:hover {
             opacity: 0.9;
         }
 
@@ -565,7 +565,7 @@
 
         .reader-toolbar {
             display: grid;
-            grid-template-columns: 44px 44px 44px minmax(0, 1fr) 44px;
+            grid-template-columns: 44px 44px 44px 44px minmax(0, 1fr) 44px;
             align-items: center;
             gap: 6px;
             width: 100%;
@@ -675,7 +675,7 @@
         @media (max-width: 600px) {
             .reader-toolbar-wrap { top: 6px; }
             .reader-toolbar {
-                grid-template-columns: 40px 40px 40px minmax(0, 1fr) 40px;
+                grid-template-columns: 40px 40px 40px 40px minmax(0, 1fr) 40px;
                 gap: 5px;
                 padding: 6px;
             }
@@ -1034,14 +1034,14 @@
 
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="searchInput" placeholder="Search manga by title..." oninput="filterManga()">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm truyện theo tên..." oninput="filterManga()">
             </div>
 
             <div class="nav-actions">
                 <a href="https://www.facebook.com/profile.php?id=61593038136415" target="_blank" rel="noopener noreferrer"
                     class="facebook-btn"><i class="fa-brands fa-facebook"></i> Facebook</a>
-                <a href="https://www.patreon.com/cw/rachelanimation" target="_blank" rel="noopener noreferrer"
-                    class="support-btn">Support me</a>
+                <a href="https://www.youtube.com/@truyenhai10" target="_blank" rel="noopener noreferrer"
+                    class="youtube-btn"><i class="fa-brands fa-youtube"></i> YouTube</a>
             </div>
         </div>
     </header>
@@ -1049,83 +1049,82 @@
     <div class="admin-panel" id="adminPanel">
         <div class="admin-panel-container">
             <div class="admin-panel-header">
-                <h3><i class="fa-solid fa-sliders"></i> ADMIN CONTROL PANEL</h3>
-                <button class="logout-btn" onclick="logoutAdmin()">Admin Logout</button>
+                <h3><i class="fa-solid fa-sliders"></i> BẢNG ĐIỀU KHIỂN QUẢN TRỊ</h3>
+                <button class="logout-btn" onclick="logoutAdmin()">Đăng xuất Admin</button>
             </div>
 
-            <div class="admin-section-title"><i class="fa-solid fa-cloud-arrow-up"></i> ADD NEW CHAPTER</div>
+            <div class="admin-section-title"><i class="fa-solid fa-cloud-arrow-up"></i> THÊM CHƯƠNG MỚI</div>
             <form id="uploadMangaForm" class="admin-form-grid">
                 <div class="admin-form-group">
-                    <label for="mangaTitle">Manga / Series Title</label>
-                    <input type="text" id="mangaTitle" placeholder="e.g., Home School" required>
+                    <label for="mangaTitle">Tên Truyện / Bộ Truyện</label>
+                    <input type="text" id="mangaTitle" placeholder="Ví dụ: Home School" required>
                 </div>
                 <div class="admin-form-group">
-                    <label for="chapterName">Chapter Name</label>
-                    <input type="text" id="chapterName" placeholder="e.g., Chapter 1" required>
+                    <label for="chapterName">Tên Chương</label>
+                    <input type="text" id="chapterName" placeholder="Ví dụ: Chapter 1" required>
                 </div>
                 <div class="admin-form-group">
-                    <label for="mangaFiles">Select chapter images</label>
+                    <label for="mangaFiles">Chọn ảnh cho chương</label>
                     <input type="file" id="mangaFiles" class="file-input" accept="image/*" multiple required>
                 </div>
-                <button type="submit" class="publish-btn" id="submitBtn"><i class="fa-solid fa-upload"></i> Publish Chapter</button>
+                <button type="submit" class="publish-btn" id="submitBtn"><i class="fa-solid fa-upload"></i> Đăng Chương</button>
             </form>
 
             <hr class="admin-divider">
 
-            <div class="admin-section-title"><i class="fa-solid fa-layer-group"></i> MERGE MANGA BY SAME NAME</div>
+            <div class="admin-section-title"><i class="fa-solid fa-layer-group"></i> GỘP TRUYỆN CÙNG TÊN</div>
             <form id="mergeMangaForm" class="admin-form-grid">
                 <div class="admin-form-group">
-                    <label for="mergeTitle">Manga / Series Title</label>
-                    <input type="text" id="mergeTitle" placeholder="e.g., Home School" required>
+                    <label for="mergeTitle">Tên Truyện / Bộ Truyện</label>
+                    <input type="text" id="mergeTitle" placeholder="Ví dụ: Home School" required>
                 </div>
-                <button type="submit" class="update-logo-btn" id="mergeMangaBtn"><i class="fa-solid fa-link"></i> Merge Same-Name Chapters</button>
+                <button type="submit" class="update-logo-btn" id="mergeMangaBtn"><i class="fa-solid fa-link"></i> Gộp Các Chương Cùng Tên</button>
             </form>
 
             <hr class="admin-divider">
 
-            <div class="admin-section-title"><i class="fa-solid fa-up-down"></i> CUSTOM CHAPTER ORDER</div>
+            <div class="admin-section-title"><i class="fa-solid fa-up-down"></i> TÙY CHỈNH THỨ TỰ CHƯƠNG</div>
             <div class="admin-form-group">
-                <label for="orderSeriesSelect">Select Manga / Series</label>
+                <label for="orderSeriesSelect">Chọn Truyện / Bộ Truyện</label>
                 <select id="orderSeriesSelect">
-                    <option value="">-- Select a manga --</option>
+                    <option value="">-- Chọn một bộ truyện --</option>
                 </select>
             </div>
             <div class="chapter-order-box">
                 <div id="chapterOrderList" class="chapter-order-list">
-                    <div style="color:#64748b;font-size:13px;text-align:center;padding:14px;">Select a manga to arrange its chapters.</div>
+                    <div style="color:#64748b;font-size:13px;text-align:center;padding:14px;">Chọn một bộ truyện để sắp xếp các chương.</div>
                 </div>
-                <div class="chapter-order-hint"><i class="fa-solid fa-grip-lines"></i> Drag chapters up or down. The order is saved for everyone.</div>
-                <button type="button" class="save-order-btn" id="saveChapterOrderBtn"><i class="fa-solid fa-floppy-disk"></i> Save Chapter Order</button>
+                <div class="chapter-order-hint"><i class="fa-solid fa-grip-lines"></i> Kéo các chương lên hoặc xuống. Thứ tự sẽ được lưu cho tất cả mọi người.</div>
+                <button type="button" class="save-order-btn" id="saveChapterOrderBtn"><i class="fa-solid fa-floppy-disk"></i> Lưu Thứ Tự Chương</button>
             </div>
 
             <hr class="admin-divider">
 
-            <div class="admin-section-title"><i class="fa-solid fa-pen-to-square"></i> CHANGE LOGO & WEBSITE NAME</div>
+            <div class="admin-section-title"><i class="fa-solid fa-pen-to-square"></i> ĐỔI LOGO & TIÊU ĐỀ TRANG WEB</div>
             <form id="updateLogoForm" class="admin-form-grid">
                 <div class="admin-form-group">
-                    <label for="newLogoText1">First Word (Blue)</label>
-                    <input type="text" id="newLogoText1" placeholder="e.g., Hanime">
+                    <label for="newLogoText1">Từ Đầu (Màu Xanh)</label>
+                    <input type="text" id="newLogoText1" placeholder="Ví dụ: Hanime">
                 </div>
                 <div class="admin-form-group">
-                    <label for="newLogoText2">Second Word (Orange)</label>
-                    <input type="text" id="newLogoText2" placeholder="e.g., rachel">
+                    <label for="newLogoText2">Từ Sau (Màu Cam)</label>
+                    <input type="text" id="newLogoText2" placeholder="Ví dụ: rachel">
                 </div>
                 <div class="admin-form-group">
-                    <label for="newLogoFile">Select new Logo image (Also Tab icon)</label>
+                    <label for="newLogoFile">Chọn ảnh Logo mới (Đồng thời là icon Tab)</label>
                     <input type="file" id="newLogoFile" class="file-input" accept="image/*">
                 </div>
                 <button type="submit" class="update-logo-btn" id="updateLogoBtn"><i class="fa-solid fa-floppy-disk"></i>
-                    Update Logo</button>
+                    Cập Nhật Logo</button>
             </form>
 
             <hr class="admin-divider">
 
-            <div class="admin-section-title"><i class="fa-solid fa-rotate-right"></i> RESET DATA</div>
+            <div class="admin-section-title"><i class="fa-solid fa-rotate-right"></i> ĐẶT LẠI DỮ LIỆU</div>
             <div>
                 <button type="button" class="logout-btn"
                     style="background-color: #f59e0b; width: 100%; padding: 10px; font-weight: 700; cursor: pointer;"
-                    onclick="resetAllViews()"><i class="fa-solid fa-rotate-right"></i> Reset All Manga Views to
-                    0</button>
+                    onclick="resetAllViews()"><i class="fa-solid fa-rotate-right"></i> Đặt Lại Toàn Bộ Lượt Xem Về 0</button>
             </div>
         </div>
     </div>
@@ -1133,7 +1132,7 @@
     <main class="main-content">
         <div id="mangaListView">
             <div class="section-title">
-                <h1><i class="fa-solid fa-fire icon-fire"></i> LATEST ONLINE UPDATES</h1>
+                <h1><i class="fa-solid fa-fire icon-fire"></i> CẬP NHẬT TRỰC TUYẾN MỚI NHẤT</h1>
             </div>
             <hr class="divider">
             <div class="manga-grid" id="mangaGrid"></div>
@@ -1143,30 +1142,34 @@
         <div class="reader-view" id="readerView">
             <div class="reader-toolbar-wrap">
                 <div class="reader-toolbar">
-                    <button type="button" class="reader-tool-btn" title="Home" onclick="showMainList(event)">
+                    <button type="button" class="reader-tool-btn" title="Trang chủ" onclick="showMainList(event)">
                         <i class="fa-solid fa-house"></i>
                     </button>
-                    <button type="button" class="reader-tool-btn" id="chapterMenuBtn" title="Choose chapter">
+                    <button type="button" class="reader-tool-btn" id="chapterMenuBtn" title="Chọn chương">
                         <i class="fa-solid fa-bars"></i>
                     </button>
-                    <button type="button" class="reader-tool-btn" id="prevChapterBtn" title="Previous chapter">
+                    <button type="button" class="reader-tool-btn" id="prevChapterBtn" title="Chương trước">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                    <select id="readerChapterSelect" class="reader-chapter-select" aria-label="Select chapter"></select>
-                    <button type="button" class="reader-tool-btn" id="nextChapterBtn" title="Next chapter">
+                    <!-- Nút Tải Xuống Chương Hiện Tại -->
+                    <button type="button" class="reader-tool-btn" id="downloadChapterBtn" title="Tải xuống danh sách ảnh chương này" onclick="downloadCurrentChapter()">
+                        <i class="fa-solid fa-download" style="color: #38bdf8;"></i>
+                    </button>
+                    <select id="readerChapterSelect" class="reader-chapter-select" aria-label="Chọn chương"></select>
+                    <button type="button" class="reader-tool-btn" id="nextChapterBtn" title="Chương sau">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
                 </div>
                 <div class="reader-chapter-menu" id="readerChapterMenu"></div>
-                <div class="reader-toolbar-title" id="readerTitle">Manga Title - Chapter</div>
+                <div class="reader-toolbar-title" id="readerTitle">Tên Truyện - Chương</div>
             </div>
 
             <div class="reader-scroll-container" id="readerPages">
-                <div style="color: #94a3b8; font-size: 14px; text-align: center; padding: 30px;">Loading pages...</div>
+                <div style="color: #94a3b8; font-size: 14px; text-align: center; padding: 30px;">Đang tải các trang...</div>
             </div>
 
             <div class="reader-footer" id="readerFooter">
-                <i class="fa-solid fa-arrows-up-down"></i> Scroll down to read all pages
+                <i class="fa-solid fa-arrows-up-down"></i> Cuộn xuống dưới để đọc tất cả các trang
             </div>
         </div>
     </main>
@@ -1174,18 +1177,18 @@
     <div class="admin-modal" id="adminModal">
         <div class="admin-box">
             <button class="close-modal-btn" onclick="closeAdminModal()">×</button>
-            <h3><i class="fa-solid fa-user-shield"></i> Admin Login</h3>
+            <h3><i class="fa-solid fa-user-shield"></i> Đăng Nhập Quản Trị</h3>
             <form id="adminLoginForm">
                 <div class="input-group">
-                    <label for="adminUsername">Username</label>
-                    <input type="text" id="adminUsername" required placeholder="Enter admin username...">
+                    <label for="adminUsername">Tên tài khoản</label>
+                    <input type="text" id="adminUsername" required placeholder="Nhập tên đăng nhập quản trị...">
                 </div>
                 <div class="input-group">
-                    <label for="adminPassword">Password</label>
-                    <input type="password" id="adminPassword" required placeholder="Enter password...">
+                    <label for="adminPassword">Mật khẩu</label>
+                    <input type="password" id="adminPassword" required placeholder="Nhập mật khẩu...">
                 </div>
-                <button type="submit" class="admin-login-btn">Login</button>
-                <div class="error-message" id="loginError">Incorrect username or password!</div>
+                <button type="submit" class="admin-login-btn">Đăng Nhập</button>
+                <div class="error-message" id="loginError">Tên tài khoản hoặc mật khẩu không chính xác!</div>
             </form>
         </div>
     </div>
@@ -1193,23 +1196,22 @@
     <div class="admin-modal" id="editModal">
         <div class="admin-box" style="max-width: 450px;">
             <button class="close-modal-btn" onclick="closeEditModal()">×</button>
-            <h3><i class="fa-solid fa-pen-to-square"></i> Edit Manga</h3>
+            <h3><i class="fa-solid fa-pen-to-square"></i> Chỉnh Sửa Truyện</h3>
             <form id="editMangaForm">
                 <input type="hidden" id="editMangaId">
                 <div class="input-group">
-                    <label for="editMangaTitle">Manga Title</label>
+                    <label for="editMangaTitle">Tên Truyện</label>
                     <input type="text" id="editMangaTitle" required>
                 </div>
                 <div class="input-group">
-                    <label for="editChapterName">Chapter Name</label>
+                    <label for="editChapterName">Tên Chương</label>
                     <input type="text" id="editChapterName" required>
                 </div>
                 <div class="input-group">
-                    <label for="editMangaFiles">Add/Replace Images (Leave blank to keep old images)</label>
+                    <label for="editMangaFiles">Thêm/Thay thế ảnh (Để trống nếu giữ nguyên ảnh cũ)</label>
                     <input type="file" id="editMangaFiles" class="file-input" accept="image/*" multiple>
                 </div>
-                <button type="submit" class="admin-login-btn" id="saveEditBtn" style="background-color: #10b981;">Save
-                    Changes</button>
+                <button type="submit" class="admin-login-btn" id="saveEditBtn" style="background-color: #10b981;">Lưu Thay Đổi</button>
             </form>
         </div>
     </div>
@@ -1219,7 +1221,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, setDoc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Cloudinary unsigned image uploads
         const CLOUDINARY_CLOUD_NAME = "ql2qbtdr";
         const CLOUDINARY_UPLOAD_PRESET = "manga_upload";
 
@@ -1280,7 +1281,6 @@
         const READING_LINK_TIME_KEY = "hanimerachel_reading_link_time";
 
         function openReadingLink() {
-            // Nếu tài khoản là admin thì không mở link quảng cáo ngoài
             if (document.body.classList.contains('is-admin')) return;
 
             const lastTime = parseInt(localStorage.getItem(READING_LINK_TIME_KEY) || "0", 10);
@@ -1291,6 +1291,25 @@
             localStorage.setItem(READING_LINK_TIME_KEY, String(now));
             window.open(READING_LINK_URL, "_blank", "noopener,noreferrer");
         }
+
+        // --- HÀM TẢI XUỐNG DANH SÁCH ẢNH TRUYỆN DƯỚI DẠNG FILE .TXT ---
+        window.downloadCurrentChapter = function() {
+            if (!currentReaderImages || currentReaderImages.length === 0) {
+                alert("Không có hình ảnh nào trong chương này để tải!");
+                return;
+            }
+
+            const content = `Truyện: ${currentMangaTitle}\nChương: ${currentMangaChapter}\nTổng số trang: ${currentReaderImages.length}\n\nDanh sách liên kết ảnh:\n` + currentReaderImages.join('\n');
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentMangaTitle} - ${currentMangaChapter}.txt`.replace(/[/\\?%*:|"<>]/g, '-');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        };
 
         async function uploadToCloudinary(file) {
             const formData = new FormData();
@@ -1322,7 +1341,7 @@
                     const t1 = data.logoText1 !== undefined ? data.logoText1 : 'Hanime';
                     const t2 = data.logoText2 !== undefined ? data.logoText2 : 'rachel';
                     document.getElementById('siteLogoText').innerHTML = `<span class="blue-text">${t1}</span><span class="orange-text">${t2}</span>`;
-                    document.title = `${t1}${t2} - Read Latest Manga Online`;
+                    document.title = `${t1}${t2} - Đọc Truyện Tranh Online`;
                 }
             } catch (e) {
                 console.error("Lỗi tải Logo:", e);
@@ -1336,7 +1355,7 @@
             const logoFile = document.getElementById('newLogoFile').files[0];
 
             updateLogoBtn.disabled = true;
-            updateLogoBtn.textContent = 'Saving...';
+            updateLogoBtn.textContent = 'Đang lưu...';
 
             try {
                 let logoUrl = null;
@@ -1353,12 +1372,12 @@
 
                 loadSavedLogo();
                 updateLogoForm.reset();
-                alert('Logo, Title, and Tab Favicon have been updated!');
+                alert('Logo, Tiêu đề và Icon Tab đã được cập nhật!');
             } catch (err) {
                 alert('Có lỗi xảy ra khi cập nhật Logo!');
             } finally {
                 updateLogoBtn.disabled = false;
-                updateLogoBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Update Logo';
+                updateLogoBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Cập Nhật Logo';
             }
         });
 
@@ -1393,6 +1412,9 @@
                 closeAdminModal();
                 adminPanel.style.display = 'block';
                 document.body.classList.add('is-admin');
+                
+                const popScript = document.getElementById('hanimerachel-popunder-script');
+                if (popScript) popScript.remove();
             } else {
                 loginError.style.display = 'block';
             }
@@ -1401,6 +1423,7 @@
         window.logoutAdmin = function () {
             adminPanel.style.display = 'none';
             document.body.classList.remove('is-admin');
+            location.reload();
         };
 
         function normalizeTitle(title) {
@@ -1440,7 +1463,7 @@
             if (!titleInput || !chapter || files.length === 0) return;
 
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Uploading chapter...';
+            submitBtn.textContent = 'Đang tải chương lên...';
 
             try {
                 const imageUrls = [];
@@ -1466,13 +1489,13 @@
 
                 uploadMangaForm.reset();
                 await renderMangaList();
-                alert(`Chapter ${chapter} published successfully!`);
+                alert(`Đã đăng ${chapter} thành công!`);
             } catch (err) {
                 console.error('Lỗi tải chapter:', err);
                 alert('Có lỗi xảy ra khi tải chapter lên!');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fa-solid fa-upload"></i> Publish Chapter';
+                submitBtn.innerHTML = '<i class="fa-solid fa-upload"></i> Đăng Chương';
             }
         });
 
@@ -1483,7 +1506,7 @@
             if (!targetTitle) return;
 
             mergeMangaBtn.disabled = true;
-            mergeMangaBtn.textContent = 'Merging...';
+            mergeMangaBtn.textContent = 'Đang gộp...';
 
             try {
                 const querySnapshot = await getDocs(collection(db, 'mangas'));
@@ -1495,7 +1518,7 @@
                 );
 
                 if (matches.length < 2) {
-                    alert('Need at least 2 chapters with the same manga name to merge.');
+                    alert('Cần ít nhất 2 chương có cùng tên truyện để thực hiện gộp.');
                     return;
                 }
 
@@ -1513,13 +1536,13 @@
 
                 mergeMangaForm.reset();
                 await renderMangaList();
-                alert(`${matches.length} chapters with the same name have been merged into one series.`);
+                alert(`Đã gộp ${matches.length} chương có cùng tên thành một bộ truyện.`);
             } catch (err) {
                 console.error('Lỗi gộp truyện:', err);
                 alert('Có lỗi xảy ra khi gộp truyện.');
             } finally {
                 mergeMangaBtn.disabled = false;
-                mergeMangaBtn.innerHTML = '<i class="fa-solid fa-link"></i> Merge Same-Name Chapters';
+                mergeMangaBtn.innerHTML = '<i class="fa-solid fa-link"></i> Gộp Các Chương Cùng Tên';
             }
         });
 
@@ -1539,7 +1562,7 @@
         }
 
         async function renderMangaList() {
-            mangaGrid.innerHTML = '<p style="color: #64748b;">Loading manga list...</p>';
+            mangaGrid.innerHTML = '<p style="color: #64748b;">Đang tải danh sách truyện...</p>';
             const paginationContainer = document.getElementById('paginationContainer');
             if (paginationContainer) paginationContainer.innerHTML = '';
 
@@ -1548,7 +1571,7 @@
                 mangaGrid.innerHTML = '';
 
                 if (querySnapshot.empty) {
-                    mangaGrid.innerHTML = '<p style="color: #64748b;">No manga uploaded yet...</p>';
+                    mangaGrid.innerHTML = '<p style="color: #64748b;">Chưa có truyện nào được tải lên...</p>';
                     return;
                 }
 
@@ -1614,11 +1637,11 @@
 
                     if (!isSeries) {
                         card.innerHTML = `
-                            <button class="delete-btn" title="Delete manga">×</button>
-                            <button class="edit-btn" title="Edit manga"><i class="fa-solid fa-pen"></i></button>
+                            <button class="delete-btn" title="Xóa truyện">×</button>
+                            <button class="edit-btn" title="Sửa truyện"><i class="fa-solid fa-pen"></i></button>
                             <div class="card-thumb">
                                 <img src="${first.images[0] || 'https://via.placeholder.com/180x220'}" width="180" height="220" alt="${first.title}" loading="lazy">
-                                <span class="badge pages-badge">${first.images.length} pages</span>
+                                <span class="badge pages-badge">${first.images.length} trang</span>
                             </div>
                             <div class="card-details">
                                 <h3 class="manga-title">${first.title}</h3>
@@ -1643,8 +1666,8 @@
                         const firstChapter = getFirstChapter(group);
 
                         card.innerHTML = `
-                            <button class="delete-btn" title="Delete series/latest chapter">×</button>
-                            <button class="edit-btn" title="Edit latest chapter"><i class="fa-solid fa-pen"></i></button>
+                            <button class="delete-btn" title="Xóa bộ truyện/chương mới nhất">×</button>
+                            <button class="edit-btn" title="Sửa chương mới nhất"><i class="fa-solid fa-pen"></i></button>
                             <div class="card-thumb">
                                 <img src="${latestChapter.images[0] || 'https://via.placeholder.com/180x220'}" width="180" height="220" alt="${title}" loading="lazy">
                             </div>
@@ -1681,7 +1704,7 @@
                 if (totalPages > 1 && paginationContainer) {
                     let paginationHTML = `
                         <button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">
-                            <i class="fa-solid fa-chevron-left"></i> Prev
+                            <i class="fa-solid fa-chevron-left"></i> Trước
                         </button>
                     `;
 
@@ -1693,7 +1716,7 @@
 
                     paginationHTML += `
                         <button class="page-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">
-                            Next <i class="fa-solid fa-chevron-right"></i>
+                            Sau <i class="fa-solid fa-chevron-right"></i>
                         </button>
                     `;
 
@@ -1724,7 +1747,7 @@
 
         window.deleteManga = async function (event, id) {
             event.stopPropagation();
-            if (confirm('Are you sure you want to delete this manga?')) {
+            if (confirm('Bạn có chắc chắn muốn xóa truyện này không?')) {
                 try {
                     await deleteDoc(doc(db, "mangas", id));
                     renderMangaList();
@@ -1759,7 +1782,7 @@
             const files = document.getElementById('editMangaFiles').files;
 
             saveEditBtn.disabled = true;
-            saveEditBtn.textContent = 'Saving...';
+            saveEditBtn.textContent = 'Đang lưu...';
 
             try {
                 const mangaRef = doc(db, "mangas", id);
@@ -1781,23 +1804,23 @@
                 await updateDoc(mangaRef, updateData);
                 closeEditModal();
                 renderMangaList();
-                alert('Manga updated successfully!');
+                alert('Cập nhật truyện thành công!');
             } catch (err) {
                 console.error("Lỗi cập nhật truyện:", err);
                 alert('Có lỗi xảy ra khi cập nhật truyện!');
             } finally {
                 saveEditBtn.disabled = false;
-                saveEditBtn.textContent = 'Save Changes';
+                saveEditBtn.textContent = 'Lưu Thay Đổi';
             }
         });
 
         window.resetAllViews = async function () {
-            if (!confirm('Are you sure you want to reset the view count of ALL manga to 0?')) return;
+            if (!confirm('Bạn có chắc chắn muốn đặt lại lượt xem của TẤT CẢ truyện về 0 không?')) return;
 
             try {
                 const querySnapshot = await getDocs(collection(db, "mangas"));
                 if (querySnapshot.empty) {
-                    alert('No manga found to reset.');
+                    alert('Không tìm thấy truyện nào để đặt lại.');
                     return;
                 }
 
@@ -1809,10 +1832,10 @@
 
                 await Promise.all(updatePromises);
                 renderMangaList();
-                alert('Successfully reset all manga views to 0!');
+                alert('Đã đặt lại lượt xem của tất cả truyện về 0 thành công!');
             } catch (err) {
                 console.error("Lỗi reset lượt xem:", err);
-                alert('An error occurred while resetting views.');
+                alert('Đã xảy ra lỗi khi đặt lại lượt xem.');
             }
         };
 
@@ -1847,7 +1870,7 @@
                     noResultMsg.style.padding = '20px 0';
                     mangaGrid.appendChild(noResultMsg);
                 }
-                noResultMsg.textContent = `No manga found matching key word "${keyword}"`;
+                noResultMsg.textContent = `Không tìm thấy truyện nào phù hợp với từ khóa "${keyword}"`;
                 noResultMsg.style.display = 'block';
             } else if (noResultMsg) {
                 noResultMsg.style.display = 'none';
@@ -1922,7 +1945,7 @@
             });
 
             const previous = orderSeriesSelect.value;
-            orderSeriesSelect.innerHTML = '<option value="">-- Select a manga --</option>';
+            orderSeriesSelect.innerHTML = '<option value="">-- Chọn một bộ truyện --</option>';
 
             [...groups.entries()]
                 .filter(([, chapters]) => chapters.length > 0)
@@ -1934,7 +1957,7 @@
                 .forEach(([key, chapters]) => {
                     const option = document.createElement('option');
                     option.value = key;
-                    option.textContent = `${chapters[0].seriesTitle || chapters[0].title} (${chapters.length} chapter${chapters.length > 1 ? 's' : ''})`;
+                    option.textContent = `${chapters[0].seriesTitle || chapters[0].title} (${chapters.length} chương)`;
                     orderSeriesSelect.appendChild(option);
                 });
 
@@ -1949,7 +1972,7 @@
             chapterOrderList.innerHTML = '';
 
             if (!key) {
-                chapterOrderList.innerHTML = '<div style="color:#64748b;font-size:13px;text-align:center;padding:14px;">Select a manga to arrange its chapters.</div>';
+                chapterOrderList.innerHTML = '<div style="color:#64748b;font-size:13px;text-align:center;padding:14px;">Chọn một bộ truyện để sắp xếp các chương.</div>';
                 return;
             }
 
@@ -1967,7 +1990,7 @@
                     <span class="chapter-order-number">${index + 1}</span>
                     <span class="chapter-order-name"></span>
                 `;
-                item.querySelector('.chapter-order-name').textContent = chapter.chapter || `Chapter ${index + 1}`;
+                item.querySelector('.chapter-order-name').textContent = chapter.chapter || `Chương ${index + 1}`;
 
                 item.addEventListener('dragstart', () => {
                     item.classList.add('dragging');
@@ -2019,7 +2042,7 @@
             if (!items.length) return;
 
             saveChapterOrderBtn.disabled = true;
-            saveChapterOrderBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+            saveChapterOrderBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...';
             try {
                 await Promise.all(items.map((item, index) =>
                     updateDoc(doc(db, 'mangas', item.dataset.id), {
@@ -2037,13 +2060,13 @@
                 populateChapterOrderSelector();
                 orderSeriesSelect.value = [...orderSeriesSelect.options].some(o => o.value === orderSeriesSelect.value) ? orderSeriesSelect.value : '';
                 renderChapterOrderEditor();
-                alert('Chapter order saved successfully!');
+                alert('Đã lưu thứ tự chương thành công!');
             } catch (err) {
                 console.error('Lỗi lưu thứ tự chapter:', err);
-                alert('Có lỗi xảy ra khi lưu thứ tự chapter.');
+                alert('Có lỗi xảy ra khi lưu thứ tự chương.');
             } finally {
                 saveChapterOrderBtn.disabled = false;
-                saveChapterOrderBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Chapter Order';
+                saveChapterOrderBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Lưu Thứ Tự Chương';
             }
         });
 
@@ -2052,7 +2075,7 @@
             readerChapterMenu.innerHTML = '';
 
             currentSeriesChapters.forEach((chapter, index) => {
-                const label = chapter.chapter || `Chapter ${index + 1}`;
+                const label = chapter.chapter || `Chương ${index + 1}`;
 
                 const option = document.createElement('option');
                 option.value = chapter.id;
@@ -2147,13 +2170,13 @@
             container.innerHTML = '';
 
             if (!currentReaderImages.length) {
-                container.innerHTML = '<div style="color: #ef4444; text-align: center; padding: 30px;">No pages available.</div>';
-                if (footer) footer.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> No pages available';
+                container.innerHTML = '<div style="color: #ef4444; text-align: center; padding: 30px;">Không có trang nào.</div>';
+                if (footer) footer.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Không có trang nào';
                 return;
             }
 
             if (footer) {
-                footer.innerHTML = `<i class="fa-solid fa-arrows-up-down"></i> Scroll down to read all ${currentReaderImages.length} pages`;
+                footer.innerHTML = `<i class="fa-solid fa-arrows-up-down"></i> Cuộn xuống dưới để đọc tất cả ${currentReaderImages.length} trang`;
             }
 
             currentReaderImages.forEach((imageUrl, index) => {
@@ -2163,10 +2186,10 @@
 
                 const loading = document.createElement('div');
                 loading.className = 'reader-page-loading';
-                loading.textContent = `Loading page ${index + 1}...`;
+                loading.textContent = `Đang tải trang ${index + 1}...`;
 
                 const img = document.createElement('img');
-                img.alt = `Page ${index + 1}`;
+                img.alt = `Trang ${index + 1}`;
                 img.loading = index < 2 ? 'eager' : 'lazy';
                 img.decoding = 'async';
                 img.src = imageUrl;
@@ -2175,7 +2198,7 @@
                 const maxAutoRetries = 2;
 
                 function retryImage(manual = false) {
-                    loading.textContent = `Loading page ${index + 1}...`;
+                    loading.textContent = `Đang tải trang ${index + 1}...`;
                     if (manual) retryCount = 0;
                     try {
                         const retryUrl = new URL(imageUrl, window.location.href);
@@ -2193,12 +2216,12 @@
                 img.addEventListener('error', function () {
                     if (retryCount < maxAutoRetries) {
                         retryCount++;
-                        loading.textContent = `Image failed; retrying page ${index + 1} (${retryCount}/${maxAutoRetries})...`;
+                        loading.textContent = `Tải ảnh lỗi; đang thử lại trang ${index + 1} (${retryCount}/${maxAutoRetries})...`;
                         window.setTimeout(() => retryImage(false), 800 * retryCount);
                         return;
                     }
 
-                    loading.innerHTML = `Failed to load page ${index + 1}. <button type="button" style="margin-left: 8px; background: #38bdf8; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #0f172a;">Retry</button>`;
+                    loading.innerHTML = `Không thể tải trang ${index + 1}. <button type="button" style="margin-left: 8px; background: #38bdf8; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #0f172a;">Thử lại</button>`;
                     const retryButton = loading.querySelector('button');
                     retryButton.addEventListener('click', function (event) {
                         event.stopPropagation();
