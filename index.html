@@ -1332,21 +1332,32 @@
         };
 
         function parseDirectImageUrls(rawText) {
-            // Chấp nhận URL ảnh trực tiếp, URL trang /show/ của Pixhost, hoặc nguyên đoạn BBCode từ Pixhost.
-            // Người đăng không cần tự tách [url], [img] hay chỉnh sửa URL thủ công.
+            // Pixhost: lấy đúng URL ảnh trong [img] hoặc thuộc tính src của <img>.
+            // Không tự đổi /thumbs/ thành /images/ vì đây là hai URL khác nhau.
             const text = String(rawText || '').trim();
             if (!text) return [];
 
             const candidates = [];
-            const bbcodeImageRegex = /\[img\](https?:\/\/[^\s\[\]]+)\[\/img\]/gi;
             let match;
-            while ((match = bbcodeImageRegex.exec(text)) !== null) candidates.push(match[1]);
 
-            // Nếu không phải BBCode, lấy URL từ mỗi dòng / dấu phẩy / khoảng trắng.
+            // BBCode Pixhost: [url=.../show/...][img].../thumbs/...[/img][/url]
+            const bbcodeImageRegex = /\[img(?:=[^\]]*)?\]\s*(https?:\/\/[^\s\[\]]+)\s*\[\/img\]/gi;
+            while ((match = bbcodeImageRegex.exec(text)) !== null) {
+                candidates.push(match[1]);
+            }
+
+            // HTML Pixhost: chỉ lấy src của <img>, bỏ href trỏ tới trang /show/.
+            if (candidates.length === 0 && /<img\b/i.test(text)) {
+                const htmlImgRegex = /<img\b[^>]*\bsrc\s*=\s*["'](https?:\/\/[^"']+)["'][^>]*>/gi;
+                while ((match = htmlImgRegex.exec(text)) !== null) {
+                    candidates.push(match[1]);
+                }
+            }
+
+            // URL ảnh trực tiếp hoặc các URL được dán riêng từng dòng.
             if (candidates.length === 0) {
-                const urlRegex = /https?:\/\/[^\s\[\]<>"']+/gi;
-                const found = text.match(urlRegex) || [];
-                candidates.push(...found);
+                const urlRegex = /https?:\/\/[^\s\[\]<>'"`]+/gi;
+                candidates.push(...(text.match(urlRegex) || []));
             }
 
             const urls = [];
@@ -1358,17 +1369,13 @@
                     throw new Error(`Chỉ chấp nhận link http/https: ${value}`);
                 }
                 if (/pixhost\.to\/manage\//i.test(value)) {
-                    throw new Error('Bạn đã dán link quản lý /manage/. Hãy quay lại Pixhost và sao chép link ảnh hoặc đoạn “Hình thu nhỏ của diễn đàn”.');
+                    throw new Error('Đây là link quản lý Pixhost (/manage/), không phải link ảnh. Hãy sao chép đoạn BBCode “Hình thu nhỏ của diễn đàn”.');
                 }
-                // Pixhost /show/ link được tự đổi sang URL ảnh đầy đủ trên host t3.
-                const showMatch = value.match(/^https?:\/\/pixhost\.to\/show\/(\d+)\/([^/?#]+)(?:[?#].*)?$/i);
-                if (showMatch) value = `https://t3.pixhost.to/images/${showMatch[1]}/${showMatch[2]}`;
-                // Bỏ trùng lặp nhưng giữ nguyên thứ tự trang truyện.
                 if (!urls.includes(value)) urls.push(value);
             }
 
             if (urls.length === 0) {
-                throw new Error('Không tìm thấy link ảnh. Hãy dán URL ảnh hoặc nguyên đoạn “Hình thu nhỏ của diễn đàn” từ Pixhost.');
+                throw new Error('Không tìm thấy link ảnh. Hãy dán URL ảnh trực tiếp, mã HTML có thẻ img, hoặc nguyên đoạn BBCode Pixhost.');
             }
             return urls;
         }
