@@ -1332,63 +1332,65 @@
         };
 
         async function parseDirectImageUrls(rawText) {
-            // Hỗ trợ URL ảnh trực tiếp, BBCode/HTML Pixhost và URL trang /show/ của Pixhost.
+            // Chuyển link trang/thumbnail Pixhost thành URL ảnh CDN trực tiếp.
+            // Không tải trang /show/ qua proxy (nguyên nhân thường gây HTTP 429).
             const text = String(rawText || '').trim();
             if (!text) return [];
 
             const candidates = [];
             let match;
 
-            // BBCode Pixhost: lấy URL nằm trong thẻ [img].
+            // Ưu tiên URL trong BBCode [img]...[/img].
             const bbcodeImageRegex = /\[img(?:=[^\]]*)?\]\s*(https?:\/\/[^\s\[\]]+)\s*\[\/img\]/gi;
             while ((match = bbcodeImageRegex.exec(text)) !== null) candidates.push(match[1]);
 
-            // HTML: lấy src của thẻ img.
+            // Hỗ trợ HTML nhúng ảnh.
             if (candidates.length === 0 && /<img\b/i.test(text)) {
                 const htmlImgRegex = /<img\b[^>]*\bsrc\s*=\s*["'](https?:\/\/[^"']+)["'][^>]*>/gi;
                 while ((match = htmlImgRegex.exec(text)) !== null) candidates.push(match[1]);
             }
 
-            // URL được dán riêng từng dòng.
+            // Hỗ trợ dán một hoặc nhiều URL trên các dòng khác nhau.
             if (candidates.length === 0) {
-                const urlRegex = /https?:\/\/[^\s\[\]<>'"`]+/gi;
-                candidates.push(...(text.match(urlRegex) || []));
+                candidates.push(...(text.match(/https?:\/\/[^\s\[\]<>'"`]+/gi) || []));
             }
 
             const urls = [];
             for (let value of candidates) {
                 value = value.replace(/[),;]+$/g, '').trim();
                 let parsed;
-                try { parsed = new URL(value); } catch { throw new Error(`Không đọc được URL ảnh: ${value}`); }
+                try { parsed = new URL(value); }
+                catch { throw new Error(`Không đọc được URL ảnh: ${value}`); }
+
                 if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') {
                     throw new Error(`Chỉ chấp nhận link http/https: ${value}`);
                 }
-                if (/pixhost\.to\/manage\//i.test(value)) {
+
+                const host = parsed.hostname.toLowerCase();
+                if (/pixhost\.(?:to|cc|st)$/i.test(host) && /\/manage\//i.test(parsed.pathname)) {
                     throw new Error('Đây là link quản lý Pixhost (/manage/), không phải link ảnh công khai.');
                 }
 
-                // Pixhost /show/ là trang xem ảnh, cần lấy URL CDN thật từ nội dung trang.
-                if (/^(www\.)?pixhost\.(to|cc|st)$/i.test(parsed.hostname) && /^\/show\/\d+\/[^/]+/i.test(parsed.pathname)) {
-                    const pageUrl = `https://${parsed.hostname}${parsed.pathname}`;
-                    let pageText = '';
-                    try {
-                        const response = await fetch(`https://r.jina.ai/http://${parsed.hostname}${parsed.pathname}`, {
-                            method: 'GET',
-                            headers: { 'Accept': 'text/plain' }
-                        });
-                        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                        pageText = await response.text();
-                    } catch (error) {
-                        throw new Error(`Không đọc được trang Pixhost: ${pageUrl}. Hãy thử dán Direct Link hoặc BBCode Pixhost. (${error.message})`);
+                // Link trang ảnh: /show/{directory}/{filename}
+                // Quy tắc CDN Pixhost: img{directory}.pixhost.to/images/{directory}/{filename}
+                const showMatch = host.match(/^(?:www\.)?pixhost\.(to|cc|st)$/i)
+                    ? parsed.pathname.match(/^\/show\/(\d+)\/([^/]+)$/i)
+                    : null;
+                if (showMatch) {
+                    const directory = showMatch[1];
+                    const filename = showMatch[2];
+                    value = `https://img${directory}.pixhost.to/images/${directory}/${filename}`;
+                } else {
+                    // BBCode Pixhost thường chứa thumbnail tNN.pixhost.to/thumbs/...;
+                    // chuyển sang ảnh gốc trên cùng CDN, không dùng ảnh thumbnail mờ.
+                    const thumbMatch = host.match(/^t(\d+)\.pixhost\.(to|cc|st)$/i);
+                    const thumbPath = parsed.pathname.match(/^\/thumbs\/(\d+)\/([^/]+)$/i);
+                    if (thumbMatch && thumbPath) {
+                        value = `https://img${thumbMatch[1]}.pixhost.${thumbMatch[2]}/images/${thumbPath[1]}/${thumbPath[2]}`;
                     }
-                    const directMatches = pageText.match(/https?:\/\/img\d+\.pixhost\.(?:to|cc|st)\/images\/[^\s\])"'<>]+/gi) || [];
-                    const directUrl = directMatches.map(url => url.replace(/[),.;]+$/g, '')).find(url => /\.(?:jpe?g|png|gif|webp|avif)(?:[?#]|$)/i.test(url));
-                    if (!directUrl) {
-                        throw new Error(`Không tìm thấy ảnh gốc trong trang Pixhost: ${pageUrl}. Hãy dán Direct Link hoặc BBCode Pixhost.`);
-                    }
-                    value = directUrl;
                 }
 
+                // Làm sạch URL Pixhost trực tiếp, giữ nguyên URL của các host ảnh khác.
                 if (!urls.includes(value)) urls.push(value);
             }
 
